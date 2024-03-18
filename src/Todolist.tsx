@@ -45,13 +45,13 @@ export function Todolist(props: PropsType) {
             <h3>
                 <EditableSpan title={props.title} onChange={changeTodolistTitle}></EditableSpan>
                 <IconButton onClick={removeTodolist}>
-                    <Delete />
+                    <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addItem={addTask} />
+            <AddItemForm addItem={addTask}/>
             <div>
                 {
-                    props.tasks.map(t => {
+                    props.tasks && props.tasks.map(t => {
                         const handleOnRemove = () => {
                             props.removeTask(t.id, props.id)
                         }
@@ -62,13 +62,13 @@ export function Todolist(props: PropsType) {
                             props.changeTaskTitle(t.id, newValue, props.id)
                         }
 
-                        return <div key={t.id} className={t.isDone ? "is-done" : ""}>
+                        return (<div key={t.id} className={t.isDone ? "is-done" : ""}>
                             <Checkbox onChange={onChangeStatusHandler} checked={t.isDone}/>
                             <EditableSpan title={t.title} onChange={onChangeTitleHandler}/>
                             <IconButton onClick={handleOnRemove}>
-                                <Delete />
+                                <Delete/>
                             </IconButton>
-                        </div>
+                        </div>)
                     })
                 }
             </div>
