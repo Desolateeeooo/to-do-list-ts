@@ -14,7 +14,9 @@ export function AddItemForm(props: AddItemFormPropsType) {
         setTaskTitle(e.currentTarget.value);
     }
     const handleOnKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        if (error !== null) {
+            setError(null);
+        }
         if (e.ctrlKey && e.charCode === 13 && taskTitle.trim() !== "") {
             props.addItem(taskTitle);
             setTaskTitle("");
