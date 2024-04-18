@@ -5,6 +5,18 @@ import {EditableSpan} from "./EditableSpan";
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {Task} from "./Task";
+import {
+    closestCenter,
+    DndContext,
+    DragEndEvent, KeyboardSensor,
+    PointerSensor,
+    UniqueIdentifier,
+    useSensor,
+    useSensors
+} from "@dnd-kit/core";
+import {SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy} from "@dnd-kit/sortable";
+import {useDispatch} from "react-redux";
+import {sortTasksAC} from "./state/tasks-reducer";
 
 export type TaskType = {
     id: string
@@ -49,6 +61,30 @@ export const Todolist = React.memo((props: PropsType) => {
         filteredTasks.filter(t => !t.isDone);
     }
 
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
+    const dispatch = useDispatch()
+
+    const sortTasks = useCallback((todolistId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier)  => {
+        dispatch(sortTasksAC(todolistId, oldIndex, newIndex));
+    }, [dispatch]);
+
+    const handleDragEnd = (event: DragEndEvent) => {
+        const {active, over} = event;
+        if (over) {
+            if (active.id !== over.id) {
+                const oldIndex = active.id
+                const newIndex = over.id
+                sortTasks(props.id, oldIndex, newIndex);
+            }
+        }
+    }
+
     return (
         <div>
             <h3>
@@ -59,13 +95,18 @@ export const Todolist = React.memo((props: PropsType) => {
             </h3>
             <AddItemForm addItem={addTask}/>
             <div>
-                {
-                    filteredTasks && filteredTasks.map(task => {
-                        return <Task changeTaskStatus={props.changeTaskStatus} changeTaskTitle={props.changeTaskTitle}
-                                     removeTask={props.removeTask} task={task} todolistId={props.id} key={task.id}
-                                     id={task.id}/>
-                    })
-                }
+                <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd} sensors={sensors}>
+                    <SortableContext items={filteredTasks} strategy={verticalListSortingStrategy}>
+                        {
+                            filteredTasks && filteredTasks.map(task => {
+                                return <Task changeTaskStatus={props.changeTaskStatus}
+                                             changeTaskTitle={props.changeTaskTitle}
+                                             removeTask={props.removeTask} task={task} todolistId={props.id} key={task.id}
+                                             id={task.id}/>
+                            })
+                        }
+                    </SortableContext>
+                </DndContext>
             </div>
             <div>
                 <Button variant={props.filter === 'all' ? "contained" : "text"}

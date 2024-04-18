@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {AddItemForm} from "./AddItemForm";
@@ -13,10 +13,6 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./state/store";
-import {Droppable} from './dndTest/Droppable';
-import {DndContext, DragOverEvent, UniqueIdentifier} from "@dnd-kit/core";
-import {Draggable} from "./dndTest/Draggable";
-import {MultipleDroppables} from "./dndTest/MultipleDroppables";
 
 export type FilterValuesType = "all" | "completed" | "active";
 export type TodolistType = {
@@ -67,12 +63,6 @@ function AppWithRedux() {
         dispatch(addTodolistAC(title));
     }, [dispatch]);
 
-
-    const [parent, setParent] = useState<UniqueIdentifier | null>(null);
-    const draggableMarkup = (
-        <Draggable id="draggable">Drag me</Draggable>
-    );
-
     return (
         <div className="App">
             <AppBar position={"static"}>
@@ -119,20 +109,16 @@ function AppWithRedux() {
                     }
                 </Grid>
             </Container>
-            <DndContext onDragEnd={handleDragEnd}>
-                <MultipleDroppables parent={parent}></MultipleDroppables>
-                {parent === null ? draggableMarkup : null}
-            </DndContext>
         </div>
     );
 
-    function handleDragEnd(event: DragOverEvent): void {
-        const {over} = event;
-
-        // If the item is dropped over a container, set it as the parent
-        // otherwise reset the parent to `null`
-        setParent(over ? over.id : null);
-    }
+    // function handleDragEnd(event: DragOverEvent): void {
+    //     const {over} = event;
+    //
+    //     // If the item is dropped over a container, set it as the parent
+    //     // otherwise reset the parent to `null`
+    //     setParent(over ? over.id : null);
+    // }
 }
 
 export default AppWithRedux;

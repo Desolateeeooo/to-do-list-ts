@@ -1,6 +1,8 @@
 import {TasksStateType} from "../AppWithRedux";
 import {v1} from "uuid";
 import {AddTodolistActionType, RemoveTodolistActionType, todolistId1} from "./todolists-reducer";
+import {UniqueIdentifier} from "@dnd-kit/core";
+import {arrayMove} from "@dnd-kit/sortable";
 
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -25,12 +27,20 @@ export type ChangeTaskTitleActionType = {
     title: string
 }
 
+export type SortTasksActionType = {
+    type: 'SORT-TASKS'
+    todolistId: string
+    oldIndex: UniqueIdentifier
+    newIndex: UniqueIdentifier
+}
+
 type ActionType = RemoveTaskActionType
     | AddTaskActionType
     | ChangeTaskStatusActionType
     | ChangeTaskTitleActionType
     | AddTodolistActionType
     | RemoveTodolistActionType
+    | SortTasksActionType
 
 const initialState: TasksStateType = {
     [todolistId1]: [
@@ -87,6 +97,24 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             delete stateCopy[action.id];
             return stateCopy;
         }
+        case "SORT-TASKS": {
+            const oldIndex = action.oldIndex;
+            const newIndex = action.newIndex;
+
+            const stateCopy = {...state};
+            const tasks = stateCopy[action.todolistId];
+
+            const a = tasks.findIndex((e) => {
+                return e.id === oldIndex;
+            })
+            const b = tasks.findIndex((e) => {
+                return e.id === newIndex;
+            })
+
+            stateCopy[action.todolistId] = arrayMove(tasks, a, b);
+            return stateCopy
+        }
+
         default:
             return state;
     }
@@ -103,4 +131,8 @@ export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: 
 }
 export const changeTaskTitleAC = (taskId: string, title: string, todolistId: string): ChangeTaskTitleActionType => {
     return {type: 'CHANGE-TASK-TITLE', title, todolistId: todolistId, taskId}
+}
+
+export const sortTasksAC = (todolistId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier): SortTasksActionType => {
+    return {type: 'SORT-TASKS', todolistId: todolistId, oldIndex, newIndex}
 }
