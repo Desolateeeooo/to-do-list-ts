@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, Todolist} from './Todolist';
-import {AddItemForm} from './AddItemForm';
+import {TaskType, TodoList} from './features/TodoList/TodoList';
+import {AddItemForm} from './components/AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from '@mui/icons-material';
 import {
@@ -9,10 +9,10 @@ import {
   changeTodoListFilterAC,
   changeTodoListTitleAC,
   removeTodoListAC,
-} from './state/todolists-reducer';
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './state/tasks-reducer';
+} from './features/TodoList/todoListSlice';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from './features/Task/taskSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootState} from './state/store';
+import {AppRootState} from './store';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -108,7 +108,7 @@ function App() {
                         return (
                             <Grid item>
                                 <Paper style={{padding: '10px'}}>
-                                    <Todolist
+                                    <TodoList
                                         key={tl.id}
                                         id={tl.id}
                                         title={tl.title}

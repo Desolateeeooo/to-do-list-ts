@@ -1,14 +1,14 @@
 import React, {useCallback} from 'react';
-import {FilterValuesType} from './App';
-import {AddItemForm} from './AddItemForm';
-import {EditableSpan} from './EditableSpan';
+import {FilterValuesType} from '../../App';
+import {AddItemForm} from '../../components/AddItemForm';
+import {EditableSpan} from '../../components/EditableSpan';
 import {Button, IconButton} from '@mui/material';
 import {Delete} from '@mui/icons-material';
-import Task from './Task';
+import Task from '../Task/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch} from 'react-redux';
-import {sortTasksAC} from './state/tasks-reducer';
+import {sortTasksAC} from '../Task/taskSlice';
 
 export type TaskType = {
     id: string;
@@ -30,7 +30,7 @@ type PropsType = {
     changeTodolistTitle: (id: string, newTitle: string) => void;
 };
 
-export const Todolist = React.memo((props: PropsType) => {
+export const TodoList = React.memo((props: PropsType) => {
     const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
 
     const onAllClickHandler = useCallback(() => changeFilter('all', props.id), [changeFilter, props.id]);

@@ -1,6 +1,6 @@
-import { TasksStateType } from '../App';
+import { TasksStateType } from '../../App';
 import { v1 } from 'uuid';
-import { AddTodolistActionType, RemoveTodolistActionType, todolistId1 } from './todolists-reducer';
+import { AddTodolistActionType, RemoveTodolistActionType, todolistId1 } from '../TodoList/todoListSlice';
 import { UniqueIdentifier } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 
