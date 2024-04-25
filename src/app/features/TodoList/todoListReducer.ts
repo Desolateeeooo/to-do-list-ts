@@ -52,18 +52,14 @@ export const todoListsReducer = (
             return [{id: action.payload.todolistId, title: action.payload.title, filter: 'all'}, ...state];
         }
         case 'todoLists/changeTodoListTitle': {
-            const todolist = state.find((tl) => tl.id === action.payload.id);
-            if (todolist) {
-                todolist.title = action.payload.title;
-            }
-            return [...state];
+            return state.map((tl: TodolistType) =>
+                tl.id === action.payload.id ? { ...tl, title: action.payload.title } : tl,
+            );
         }
         case 'todoLists/changeTodoListFilter': {
-            const todolist = state.find((tl) => tl.id === action.payload.id);
-            if (todolist) {
-                todolist.filter = action.payload.filter;
-            }
-            return [...state];
+            return state.map((tl: TodolistType) =>
+                tl.id === action.payload.id ? { ...tl, filter: action.payload.filter } : tl,
+            );
         }
         default:
             return state;

@@ -8,7 +8,7 @@ import Task from '../Task/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch} from 'react-redux';
-import {sortTasksAC} from '../Task/taskSlice';
+import {sortTasksAC} from '../Task/taskReducer';
 
 export type TaskType = {
     id: string;
