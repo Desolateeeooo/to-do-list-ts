@@ -1,9 +1,9 @@
 import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
 import {Checkbox, IconButton} from '@mui/material';
-import {EditableSpan} from '../../components/EditableSpan';
+import {EditableSpan} from './EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
-import {TaskType} from "../TodoList/TodoList";
+import {TaskType} from "../features/TodoList/TodoList";
 
 type TaskPropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;

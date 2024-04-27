@@ -1,20 +1,17 @@
-import {combineReducers, createStore} from 'redux';
-import {todoListsReducer} from './features/TodoList/todoListReducer';
-import {tasksReducer} from './features/Task/taskReducer';
-import {configureStore} from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import todoListSlice from "./features/TodoList/todoListSlice";
 
 export type AppRootState = ReturnType<typeof rootReducer>;
 
 const rootReducer = combineReducers({
-    todolists: todoListsReducer,
-    tasks: tasksReducer,
+    todoListSlice: todoListSlice,
 });
 
-export const store= configureStore(
-    {
-        reducer: rootReducer
-    }
-);
+export const store = configureStore({
+    reducer: rootReducer,
+});
 
+//Saving store to the window
 // @ts-ignore
 window.store = store;

@@ -4,11 +4,11 @@ import {AddItemForm} from '../../components/AddItemForm';
 import {EditableSpan} from '../../components/EditableSpan';
 import {Button, IconButton} from '@mui/material';
 import {Delete} from '@mui/icons-material';
-import Task from '../Task/Task';
+import Task from '../../components/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch} from 'react-redux';
-import {sortTasksAC} from '../Task/taskReducer';
+import {sortTasks} from "./todoListSlice";
 
 export type TaskType = {
     id: string;
@@ -77,7 +77,7 @@ export const TodoList = React.memo((props: PropsType) => {
 
     const sortTasksHandler = useCallback(
         (todolistId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier) => {
-            dispatch(sortTasksAC(todolistId, oldIndex, newIndex));
+            dispatch(sortTasks({todolistId, oldIndex, newIndex}));
         },
         [dispatch],
     );
@@ -108,20 +108,19 @@ export const TodoList = React.memo((props: PropsType) => {
             <div>
                 <DndContext onDragEnd={onDragEndHandler} sensors={sensors}>
                     <SortableContext items={filteredTasks} strategy={verticalListSortingStrategy}>
-                        {filteredTasks &&
-                            filteredTasks.map((task) => {
-                                return (
-                                    <Task
-                                        changeTaskStatus={props.changeTaskStatus}
-                                        changeTaskTitle={props.changeTaskTitle}
-                                        removeTask={props.removeTask}
-                                        task={task}
-                                        todolistId={props.id}
-                                        key={task.id}
-                                        id={task.id}
-                                    />
-                                );
-                            })}
+                        {filteredTasks.map((task) => {
+                            return (
+                                <Task
+                                    changeTaskStatus={props.changeTaskStatus}
+                                    changeTaskTitle={props.changeTaskTitle}
+                                    removeTask={props.removeTask}
+                                    task={task}
+                                    todolistId={props.id}
+                                    key={task.id}
+                                    id={task.id}
+                                />
+                            );
+                        })}
                     </SortableContext>
                 </DndContext>
             </div>
