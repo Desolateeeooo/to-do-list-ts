@@ -16,7 +16,7 @@ export type TaskType = {
     isDone: boolean;
 };
 
-type PropsType = {
+type TodoListPropsType = {
     id: string;
     title: string;
     tasks: Array<TaskType>;
@@ -30,7 +30,7 @@ type PropsType = {
     changeTodolistTitle: (id: string, newTitle: string) => void;
 };
 
-export const TodoList = React.memo((props: PropsType) => {
+export const TodoList = React.memo((props: TodoListPropsType) => {
     const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
 
     const onAllClickHandler = useCallback(() => changeFilter('all', props.id), [changeFilter, props.id]);
