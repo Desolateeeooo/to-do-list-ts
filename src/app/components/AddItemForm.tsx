@@ -34,7 +34,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
   return (
     <div>
       <TextField
-        label={'Add task'}
+        label={'Add something'}
         value={taskTitle}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}
