@@ -1,5 +1,5 @@
-import React, {memo, useCallback, MouseEvent} from 'react';
-import {IconButton} from '@mui/material';
+import React, {memo, useCallback, MouseEvent, ChangeEvent} from 'react';
+import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {RewardType} from "../features/Rewards/RewardsContainer";
@@ -36,6 +36,15 @@ const Reward = (props: RewardPropsType) => {
         [id, removeReward, rewardListId],
     );
 
+    const onRemoveHandlerForCheckbox = useCallback(
+        (event: ChangeEvent<HTMLInputElement>) => {
+            event.stopPropagation();
+            event.preventDefault();
+            removeReward(id, rewardListId);
+        },
+        [id, removeReward, rewardListId],
+    );
+
     const onChangeTitleHandler = useCallback(
         (newValue: string) => {
             changeRewardTitle(id, newValue, rewardListId);
@@ -52,6 +61,7 @@ const Reward = (props: RewardPropsType) => {
             {...attributes}
             {...listeners}
         >
+            <Checkbox onChange={(e) => onRemoveHandlerForCheckbox(e)} />
             <EditableSpan title={props.reward.title} onChange={onChangeTitleHandler}/>
             <IconButton onClick={(e) => onRemoveHandler(e)}>
                 <Delete/>
