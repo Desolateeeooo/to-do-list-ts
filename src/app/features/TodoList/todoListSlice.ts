@@ -5,11 +5,11 @@ import { UniqueIdentifier } from "@dnd-kit/core";
 import { TaskType } from "./TodoList";
 import {arrayMove} from "@dnd-kit/sortable";
 
-export interface IRemoveTodoListAction {
+interface IRemoveTodoListAction {
     id: string;
 }
 
-export interface IAddTodoListAction {
+interface IAddTodoListAction {
     title: string;
     todolistId: string;
 }
