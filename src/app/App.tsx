@@ -17,6 +17,7 @@ import {
     changeTaskTitle,
 } from "./features/TodoList/todoListSlice";
 import {v1} from "uuid";
+import RewardsContainer, {RewardListType, RewardType} from "./features/Rewards/RewardsContainer";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -33,6 +34,7 @@ export type TasksStateType = {
 function App() {
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodolistType>>((state) => state.todoListSlice);
+    const rewards = useSelector<AppRootState, Array<RewardListType>>((state) => state.rewardsSLice);
 
     const removeTaskHandler = useCallback(
         (id: string, todolistId: string) => {
@@ -128,6 +130,21 @@ function App() {
                             </Grid>
                         );
                     })}
+                    {rewards && rewards.map((rl: RewardListType) => {
+                        return (
+                          <Grid item key={rl.id}>
+                          <Paper style={{padding: '10px'}}>
+                              <RewardsContainer
+                                title={rl.title}
+                                rewards={rl.rewards}
+                                rewardListId={rl.id}
+                                key={rl.id}
+                              />
+                          </Paper>
+                        </Grid>
+                        );
+                        }
+                    )}
                 </Grid>
             </Container>
         </div>

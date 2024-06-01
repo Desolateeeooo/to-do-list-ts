@@ -3,7 +3,7 @@ import {TextField} from '@mui/material';
 
 type EditableSpanPropsType = {
     title: string;
-    onChange: (newValue: string) => void;
+    onChange: (newValue: string, rewardListId?: string) => void;
 };
 
 export const EditableSpan = React.memo((props: EditableSpanPropsType) => {

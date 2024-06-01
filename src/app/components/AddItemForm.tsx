@@ -3,7 +3,7 @@ import { IconButton, TextField } from '@mui/material';
 import { ControlPoint } from '@mui/icons-material';
 
 type AddItemFormPropsType = {
-  addItem: (title: string) => void;
+  addItem: (title: string, rewardListId?: string, price?: number) => void;
 };
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
