@@ -33,6 +33,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
         }
     };
 
+
     return (
         <div style={{display: 'flex', paddingBottom: '20px'}}>
             <div style={props.style}>
