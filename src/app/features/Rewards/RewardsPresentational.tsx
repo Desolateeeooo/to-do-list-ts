@@ -5,6 +5,7 @@ import {RewardType} from "./RewardsContainer";
 import Reward from "../../components/Reward";
 import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import {DndContext, DragEndEvent, SensorDescriptor, SensorOptions} from "@dnd-kit/core";
+import {Paper} from "@mui/material";
 
 type RewardsPropsType = {
     addReward: (title: string, rewardListId?: string, price?: number) => void;
@@ -25,21 +26,24 @@ export const RewardsPresentational = React.memo((props: RewardsPropsType) => {
                     <h3>
                         <EditableSpan title={props.title} onChange={props.changeRewardsListTitle}></EditableSpan>
                     </h3>
-                    <AddItemForm addItem={props.addReward} label={"Add a Reward"}></AddItemForm>
+                    <AddItemForm addItem={props.addReward} label={"Add a Reward"} style={{background: '#D9DDDC'}}></AddItemForm>
                 </div>
                 <div>
                     <DndContext onDragEnd={props.onDragEndHandler} sensors={props.sensors}>
                         <SortableContext items={props.rewards} strategy={verticalListSortingStrategy}>
                             {props.rewards && props.rewards.map((r) => {
                                 return (
-                                    <Reward
-                                        reward={r}
-                                        key={r.id}
-                                        id={r.id}
-                                        rewardListId={props.rewardListId}
-                                        changeRewardTitle={props.changeRewardsListTitle}
-                                        removeReward={props.removeReward}
-                                    />
+                                    <Paper style={{padding: '5px'}}>
+                                        <Reward
+                                            reward={r}
+                                            key={r.id}
+                                            id={r.id}
+                                            rewardListId={props.rewardListId}
+                                            changeRewardTitle={props.changeRewardsListTitle}
+                                            removeReward={props.removeReward}
+                                            price={r.price}
+                                        />
+                                    </Paper>
                                 );
                             })}
                         </SortableContext>

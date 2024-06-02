@@ -1,7 +1,7 @@
-import React, {memo, useCallback, MouseEvent, ChangeEvent} from 'react';
-import {Checkbox, IconButton} from '@mui/material';
+import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
+import {IconButton, Paper} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
-import {Delete} from '@mui/icons-material';
+import {CurrencyExchange, CurrencyYuan, Delete} from '@mui/icons-material';
 import {RewardType} from "../features/Rewards/RewardsContainer";
 import {useSortable} from "@dnd-kit/sortable";
 
@@ -11,6 +11,7 @@ type RewardPropsType = {
     changeRewardTitle: (id: string, title: string, rewardListId: string) => void;
     rewardListId: string,
     removeReward: (id: string, rewardListId: string) => void;
+    price: number;
 }
 
 const Reward = (props: RewardPropsType) => {
@@ -36,15 +37,6 @@ const Reward = (props: RewardPropsType) => {
         [id, removeReward, rewardListId],
     );
 
-    const onRemoveHandlerForCheckbox = useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => {
-            event.stopPropagation();
-            event.preventDefault();
-            removeReward(id, rewardListId);
-        },
-        [id, removeReward, rewardListId],
-    );
-
     const onChangeTitleHandler = useCallback(
         (newValue: string) => {
             changeRewardTitle(id, newValue, rewardListId);
@@ -61,11 +53,18 @@ const Reward = (props: RewardPropsType) => {
             {...attributes}
             {...listeners}
         >
-            <Checkbox onChange={(e) => onRemoveHandlerForCheckbox(e)} />
-            <EditableSpan title={props.reward.title} onChange={onChangeTitleHandler}/>
-            <IconButton onClick={(e) => onRemoveHandler(e)}>
-                <Delete/>
-            </IconButton>
+            <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <Paper style={{padding: '1px', background: '#FFEEEE'}}>
+                    {props.price}
+                    <IconButton onClick={(e) => onRemoveHandler(e)}>
+                        <CurrencyYuan/>
+                    </IconButton>
+                </Paper>
+                <EditableSpan title={props.reward.title} onChange={onChangeTitleHandler}/>
+                <IconButton onClick={(e) => onRemoveHandler(e)}>
+                    <Delete/>
+                </IconButton>
+            </div>
         </div>
     );
 };

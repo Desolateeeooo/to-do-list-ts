@@ -133,7 +133,7 @@ function App() {
                     {rewards && rewards.map((rl: RewardListType) => {
                         return (
                           <Grid item key={rl.id}>
-                          <Paper style={{padding: '10px'}}>
+                          <Paper style={{padding: '10px', background: '#eeeeee'}}>
                               <RewardsContainer
                                 title={rl.title}
                                 rewards={rl.rewards}
