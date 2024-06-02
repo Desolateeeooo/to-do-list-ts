@@ -4,6 +4,7 @@ import { ControlPoint } from '@mui/icons-material';
 
 type AddItemFormPropsType = {
   addItem: (title: string, rewardListId?: string, price?: number) => void;
+  label: string;
 };
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -34,7 +35,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
   return (
     <div>
       <TextField
-        label={'Add something'}
+        label={props.label}
         value={taskTitle}
         onChange={handleOnChange}
         onKeyPress={handleOnKeyPress}

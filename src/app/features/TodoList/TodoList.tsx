@@ -104,7 +104,7 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
                     <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addItem={addTaskHandler}/>
+            <AddItemForm addItem={addTaskHandler} label={"Add a To Do"}/>
             <div>
                 <DndContext onDragEnd={onDragEndHandler} sensors={sensors}>
                     <SortableContext items={filteredTasks} strategy={verticalListSortingStrategy}>

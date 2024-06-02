@@ -25,7 +25,7 @@ export const RewardsPresentational = React.memo((props: RewardsPropsType) => {
                     <h3>
                         <EditableSpan title={props.title} onChange={props.changeRewardsListTitle}></EditableSpan>
                     </h3>
-                    <AddItemForm addItem={props.addReward}></AddItemForm>
+                    <AddItemForm addItem={props.addReward} label={"Add a Reward"}></AddItemForm>
                 </div>
                 <div>
                     <DndContext onDragEnd={props.onDragEndHandler} sensors={props.sensors}>
