@@ -105,7 +105,7 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addItem={addTodoListHandler}/>
+                    <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
                 </Grid>
                 <Grid container spacing={3}>
                     {todoLists && todoLists.map((tl) => {
@@ -133,7 +133,7 @@ function App() {
                     {rewards && rewards.map((rl: RewardListType) => {
                         return (
                           <Grid item key={rl.id}>
-                          <Paper style={{padding: '10px'}}>
+                          <Paper style={{padding: '10px', background: '#eeeeee'}}>
                               <RewardsContainer
                                 title={rl.title}
                                 rewards={rl.rewards}

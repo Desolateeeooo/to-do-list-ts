@@ -60,6 +60,10 @@ const RewardsContainer = React.memo((props: RewardsAContainerPropsType) => {
         [dispatch],
     );
 
+    const changeRewardPriceHandler = useCallback((id: string, newPrice: number | undefined, rewardListId: string) => {
+
+    }, []);
+
     const sortRewardsHandler = useCallback(
         (rewardListId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier) => {
             dispatch(sortRewards({rewardListId, oldIndex, newIndex}));
