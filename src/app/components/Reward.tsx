@@ -4,6 +4,7 @@ import {EditableSpan} from './EditableSpan';
 import {CurrencyExchange, CurrencyYuan, Delete} from '@mui/icons-material';
 import {RewardType} from "../features/Rewards/RewardsContainer";
 import {useSortable} from "@dnd-kit/sortable";
+import {changeRewardPrice} from "../features/Rewards/rewardsSlice";
 
 type RewardPropsType = {
     reward: RewardType;
@@ -11,11 +12,12 @@ type RewardPropsType = {
     changeRewardTitle: (id: string, title: string, rewardListId: string) => void;
     rewardListId: string,
     removeReward: (id: string, rewardListId: string) => void;
-    price: number;
+    price: string;
+    changeRewardPrice: (id: string, newPrice: string, rewardListId: string) => void;
 }
 
 const Reward = (props: RewardPropsType) => {
-    const {removeReward, changeRewardTitle, rewardListId, id} = props;
+    const {removeReward, changeRewardTitle, changeRewardPrice, rewardListId, id} = props;
 
     const {attributes, listeners, setNodeRef, transform, transition} = useSortable({
         id,
@@ -44,6 +46,13 @@ const Reward = (props: RewardPropsType) => {
         [id, changeRewardTitle, rewardListId],
     );
 
+    const onChangePriceHandler = useCallback(
+        (newValue: string) => {
+            changeRewardPrice(id, newValue, rewardListId);
+        },
+        [id, changeRewardPrice, rewardListId],
+    );
+
     return (
         <div
             id={id}
@@ -55,7 +64,7 @@ const Reward = (props: RewardPropsType) => {
         >
             <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                 <Paper style={{padding: '1px', background: '#FFEEEE'}}>
-                    {props.price}
+                    <EditableSpan title={`${props.price}`} onChange={onChangePriceHandler} />
                     <IconButton onClick={(e) => onRemoveHandler(e)}>
                         <CurrencyYuan/>
                     </IconButton>

@@ -1,13 +1,20 @@
 import React, {useCallback} from "react";
 import {useDispatch} from "react-redux";
-import {addReward, changeRewardsListTitle, changeRewardTitle, removeReward, sortRewards} from "./rewardsSlice";
+import {
+    addReward,
+    changeRewardPrice,
+    changeRewardsListTitle,
+    changeRewardTitle,
+    removeReward,
+    sortRewards
+} from "./rewardsSlice";
 import {RewardsPresentational} from "./RewardsPresentational";
 import {DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from "@dnd-kit/core";
 
 export type RewardType = {
     id: string,
     title: string,
-    price: number,
+    price: string,
 }
 
 export type RewardListType = {
@@ -60,9 +67,12 @@ const RewardsContainer = React.memo((props: RewardsAContainerPropsType) => {
         [dispatch],
     );
 
-    const changeRewardPriceHandler = useCallback((id: string, newPrice: number | undefined, rewardListId: string) => {
-
-    }, []);
+    const changeRewardPriceHandler = useCallback(
+        (id: string, newPrice: string, rewardListId: string) => {
+            dispatch(changeRewardPrice({id, newPrice, rewardListId}));
+        },
+        [dispatch],
+    );
 
     const sortRewardsHandler = useCallback(
         (rewardListId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier) => {
@@ -96,6 +106,8 @@ const RewardsContainer = React.memo((props: RewardsAContainerPropsType) => {
             rewardListId={props.rewardListId}
             sensors={sensors}
             onDragEndHandler={onDragEndHandler}
+            changeRewardPrice={changeRewardPriceHandler}
+
         />
     );
 });

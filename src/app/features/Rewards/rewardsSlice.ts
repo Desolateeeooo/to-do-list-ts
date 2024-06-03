@@ -32,6 +32,12 @@ interface ISortRewardsAction {
     newIndex: UniqueIdentifier;
 }
 
+interface IChangeRewardPriceAction {
+    rewardListId: string;
+    id: string;
+    newPrice: string;
+}
+
 const initialRewardListId = v1();
 
 const initialState: RewardListType[] = [
@@ -39,7 +45,7 @@ const initialState: RewardListType[] = [
         id: initialRewardListId,
         title: "Rewards",
         rewards: [
-            {id: v1(), title: "Buy a book", price: 0},
+            {id: v1(), title: "Buy a book", price: `${0}`},
         ],
     },
 ];
@@ -52,7 +58,7 @@ const rewardsSlice = createSlice({
             const newReward = {
                 id: v1(),
                 title: action.payload.title,
-                price: 0,
+                price: `${0}`,
             };
             const rewardListIndex = state.findIndex(
                 (rl: RewardListType) => rl.id === action.payload.rewardListId,
@@ -114,6 +120,20 @@ const rewardsSlice = createSlice({
                 indexTo,
             );
         },
+        changeRewardPrice: (state, action: PayloadAction<IChangeRewardPriceAction>) => {
+            const rewardListIndex = state.findIndex(
+                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+            );
+            state[rewardListIndex].rewards = state[rewardListIndex].rewards.map(
+                (r: RewardType) =>
+                    r.id === action.payload.id
+                        ? {
+                            ...r,
+                            price: `${action.payload.newPrice}`,
+                        }
+                        : r,
+            );
+        },
     },
 
 });
@@ -124,6 +144,7 @@ export const {
     changeRewardTitle,
     removeReward,
     sortRewards,
+    changeRewardPrice,
 } = rewardsSlice.actions;
 
 export default rewardsSlice.reducer;

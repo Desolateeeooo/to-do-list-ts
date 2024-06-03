@@ -17,6 +17,7 @@ type RewardsPropsType = {
     rewardListId: string;
     sensors: SensorDescriptor<SensorOptions>[];
     onDragEndHandler: (event: DragEndEvent) => void;
+    changeRewardPrice: (id: string, newPrice: string, rewardListId: string) => void;
 };
 
 export const RewardsPresentational = React.memo((props: RewardsPropsType) => {
@@ -42,6 +43,7 @@ export const RewardsPresentational = React.memo((props: RewardsPropsType) => {
                                             changeRewardTitle={props.changeRewardsListTitle}
                                             removeReward={props.removeReward}
                                             price={r.price}
+                                            changeRewardPrice={props.changeRewardPrice}
                                         />
                                     </Paper>
                                 );
