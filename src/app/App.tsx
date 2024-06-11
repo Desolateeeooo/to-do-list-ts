@@ -18,6 +18,7 @@ import {
 } from "./features/TodoList/todoListSlice";
 import {v1} from "uuid";
 import RewardsContainer, {RewardListType, RewardType} from "./features/Rewards/RewardsContainer";
+import SearchBarContainer from './features/SearchBar/SearchBarContainer';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -103,6 +104,9 @@ function App() {
                     <Button color={'inherit'}>Login</Button>
                 </Toolbar>
             </AppBar>
+            <Grid container>
+                <SearchBarContainer></SearchBarContainer>
+            </Grid>
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
