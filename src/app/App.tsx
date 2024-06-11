@@ -19,7 +19,6 @@ import {
 import {v1} from "uuid";
 import RewardsContainer, {RewardListType} from "./features/Rewards/RewardsContainer";
 import SearchTermContainer from './features/SearchBar/SearchTermContainer';
-import {selectSearchTerm} from "./features/SearchBar/searchTermSlice";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -107,9 +106,9 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Grid container style={{paddingTop: '20px', paddingLeft: '20px'}}>
-                    <SearchTermContainer />
+                    <SearchTermContainer/>
                 </Grid>
-                <hr />
+                <hr/>
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
                 </Grid>

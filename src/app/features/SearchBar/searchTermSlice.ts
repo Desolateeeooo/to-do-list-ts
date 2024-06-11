@@ -24,8 +24,6 @@ const searchTermSlice = createSlice({
     }
 });
 
-export const selectSearchTerm = (state: AppRootState) => state.searchTermSlice;
-
 export const {
     setSearchTerm,
     clearSearchTerm,
