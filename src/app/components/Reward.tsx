@@ -1,10 +1,9 @@
-import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
+import React, {memo, MouseEvent, useCallback} from 'react';
 import {IconButton, Paper} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
-import {CurrencyExchange, CurrencyYuan, Delete} from '@mui/icons-material';
+import {CurrencyYuan, Delete} from '@mui/icons-material';
 import {RewardType} from "../features/Rewards/RewardsContainer";
 import {useSortable} from "@dnd-kit/sortable";
-import {changeRewardPrice} from "../features/Rewards/rewardsSlice";
 
 type RewardPropsType = {
     reward: RewardType;
@@ -64,7 +63,7 @@ const Reward = (props: RewardPropsType) => {
         >
             <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                 <Paper style={{padding: '1px', background: '#FFEEEE'}}>
-                    <EditableSpan title={`${props.price}`} onChange={onChangePriceHandler} />
+                    <EditableSpan title={`${props.price}`} onChange={onChangePriceHandler} numberSpan={true}/>
                     <IconButton onClick={(e) => onRemoveHandler(e)}>
                         <CurrencyYuan/>
                     </IconButton>
