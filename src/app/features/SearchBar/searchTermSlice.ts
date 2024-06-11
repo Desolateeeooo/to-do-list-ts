@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AppRootState} from "../../store";
 
 interface ISetSearchTerm {
     userInput: string;
