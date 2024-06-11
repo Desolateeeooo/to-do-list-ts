@@ -3,6 +3,8 @@ import {v1} from "uuid";
 import {RewardListType, RewardType} from "./RewardsContainer";
 import {arrayMove} from "@dnd-kit/sortable";
 import {UniqueIdentifier} from "@dnd-kit/core";
+import {AppRootState} from "../../store";
+import {selectSearchTerm} from "../SearchBar/searchTermSlice";
 
 interface IAddRewardAction {
     title: string;
@@ -54,6 +56,9 @@ const rewardsSlice = createSlice({
     name: "Rewards",
     initialState: initialState,
     reducers: {
+        loadData: (state, action) => {
+
+        },
         addReward: (state, action: PayloadAction<IAddRewardAction>) => {
             const newReward = {
                 id: v1(),
@@ -137,6 +142,18 @@ const rewardsSlice = createSlice({
     },
 
 });
+
+//Selectors
+///////////////////////////////////
+
+export const selectRewards = (state: AppRootState) => state.rewardsSLice;
+
+export const selectFilteredRewards = (state: AppRootState) => {
+    const rewards = selectRewards(state);
+    const searchTerm = selectSearchTerm(state);
+
+    return rewards.filter((rl) => rl.rewards.map((r) => r.title.toLowerCase().includes(searchTerm.toLowerCase())));
+};
 
 export const {
     addReward,

@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     addReward,
     changeRewardPrice,
@@ -10,6 +10,7 @@ import {
 } from "./rewardsSlice";
 import {RewardsPresentational} from "./RewardsPresentational";
 import {DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from "@dnd-kit/core";
+import {AppRootState} from "../../store";
 
 export type RewardType = {
     id: string,
@@ -25,12 +26,17 @@ export type RewardListType = {
 
 type RewardsAContainerPropsType = {
     title: string,
-    rewards: RewardType[]
+    rewards: RewardType[],
     rewardListId: string,
 }
 
 const RewardsContainer = React.memo((props: RewardsAContainerPropsType) => {
+    const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
     const dispatch = useDispatch();
+
+    const searchedRewards = props.rewards.filter((r) => {
+            return r.title.toLowerCase().includes(searchTerm.toLowerCase())
+        });
 
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
@@ -101,7 +107,7 @@ const RewardsContainer = React.memo((props: RewardsAContainerPropsType) => {
             removeReward={removeRewardHandler}
             title={props.title}
             changeRewardsListTitle={changeRewardsListTitleHandler}
-            rewards={props.rewards}
+            rewards={searchedRewards}
             changeRewardTitle={changeRewardTitleHandler}
             rewardListId={props.rewardListId}
             sensors={sensors}

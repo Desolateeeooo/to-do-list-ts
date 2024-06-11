@@ -7,18 +7,19 @@ import {Menu} from '@mui/icons-material';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootState} from './store';
 import {
-    addTodoList,
-    changeTodoListFilter,
-    changeTodoListTitle,
-    removeTodoList,
-    removeTask,
     addTask,
+    addTodoList,
     changeTaskStatus,
     changeTaskTitle,
+    changeTodoListFilter,
+    changeTodoListTitle,
+    removeTask,
+    removeTodoList,
 } from "./features/TodoList/todoListSlice";
 import {v1} from "uuid";
-import RewardsContainer, {RewardListType, RewardType} from "./features/Rewards/RewardsContainer";
-import SearchBarContainer from './features/SearchBar/SearchBarContainer';
+import RewardsContainer, {RewardListType} from "./features/Rewards/RewardsContainer";
+import SearchTermContainer from './features/SearchBar/SearchTermContainer';
+import {selectSearchTerm} from "./features/SearchBar/searchTermSlice";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -36,6 +37,28 @@ function App() {
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodolistType>>((state) => state.todoListSlice);
     const rewards = useSelector<AppRootState, Array<RewardListType>>((state) => state.rewardsSLice);
+    const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
+
+    const selectFilteredRewards = (state: AppRootState) => {
+        return rewards.filter((rl) => {
+            rl.rewards.map((r) => {
+                r.title.toLowerCase().includes(searchTerm.toLowerCase())
+            });
+        });
+    }
+
+    const searchedRewards = rewards.filter((rl) => {
+        rl.rewards.map((r) => {
+            r.title.toLowerCase().includes(searchTerm.toLowerCase())
+        });
+    });
+
+    const searchedTasks = todoLists.filter((tl) => {
+        tl.tasks.map((t) => {
+            t.title.toLowerCase().includes(searchTerm.toLowerCase())
+        });
+    })
+
 
     const removeTaskHandler = useCallback(
         (id: string, todolistId: string) => {
@@ -104,10 +127,11 @@ function App() {
                     <Button color={'inherit'}>Login</Button>
                 </Toolbar>
             </AppBar>
-            <Grid container>
-                <SearchBarContainer></SearchBarContainer>
-            </Grid>
             <Container fixed>
+                <Grid container style={{paddingTop: '20px', paddingLeft: '20px'}}>
+                    <SearchTermContainer />
+                </Grid>
+                <hr />
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
                 </Grid>
@@ -135,18 +159,18 @@ function App() {
                         );
                     })}
                     {rewards && rewards.map((rl: RewardListType) => {
-                        return (
-                          <Grid item key={rl.id}>
-                          <Paper style={{padding: '10px', background: '#eeeeee'}}>
-                              <RewardsContainer
-                                title={rl.title}
-                                rewards={rl.rewards}
-                                rewardListId={rl.id}
-                                key={rl.id}
-                              />
-                          </Paper>
-                        </Grid>
-                        );
+                            return (
+                                <Grid item key={rl.id}>
+                                    <Paper style={{padding: '10px', background: '#eeeeee'}}>
+                                        <RewardsContainer
+                                            title={rl.title}
+                                            rewards={rl.rewards}
+                                            rewardListId={rl.id}
+                                            key={rl.id}
+                                        />
+                                    </Paper>
+                                </Grid>
+                            );
                         }
                     )}
                 </Grid>
