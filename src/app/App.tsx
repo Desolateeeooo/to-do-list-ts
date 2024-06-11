@@ -37,28 +37,6 @@ function App() {
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodolistType>>((state) => state.todoListSlice);
     const rewards = useSelector<AppRootState, Array<RewardListType>>((state) => state.rewardsSLice);
-    const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
-
-    const selectFilteredRewards = (state: AppRootState) => {
-        return rewards.filter((rl) => {
-            rl.rewards.map((r) => {
-                r.title.toLowerCase().includes(searchTerm.toLowerCase())
-            });
-        });
-    }
-
-    const searchedRewards = rewards.filter((rl) => {
-        rl.rewards.map((r) => {
-            r.title.toLowerCase().includes(searchTerm.toLowerCase())
-        });
-    });
-
-    const searchedTasks = todoLists.filter((tl) => {
-        tl.tasks.map((t) => {
-            t.title.toLowerCase().includes(searchTerm.toLowerCase())
-        });
-    })
-
 
     const removeTaskHandler = useCallback(
         (id: string, todolistId: string) => {
