@@ -7,17 +7,18 @@ import {Menu} from '@mui/icons-material';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootState} from './store';
 import {
-    addTodoList,
-    changeTodoListFilter,
-    changeTodoListTitle,
-    removeTodoList,
-    removeTask,
     addTask,
+    addTodoList,
     changeTaskStatus,
     changeTaskTitle,
+    changeTodoListFilter,
+    changeTodoListTitle,
+    removeTask,
+    removeTodoList,
 } from "./features/TodoList/todoListSlice";
 import {v1} from "uuid";
-import RewardsContainer, {RewardListType, RewardType} from "./features/Rewards/RewardsContainer";
+import RewardsContainer, {RewardListType} from "./features/Rewards/RewardsContainer";
+import SearchTermContainer from './features/SearchBar/SearchTermContainer';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -104,6 +105,10 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
+                <Grid container style={{paddingTop: '20px', paddingLeft: '20px'}}>
+                    <SearchTermContainer/>
+                </Grid>
+                <hr/>
                 <Grid container style={{padding: '20px'}}>
                     <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
                 </Grid>
@@ -131,18 +136,18 @@ function App() {
                         );
                     })}
                     {rewards && rewards.map((rl: RewardListType) => {
-                        return (
-                          <Grid item key={rl.id}>
-                          <Paper style={{padding: '10px', background: '#eeeeee'}}>
-                              <RewardsContainer
-                                title={rl.title}
-                                rewards={rl.rewards}
-                                rewardListId={rl.id}
-                                key={rl.id}
-                              />
-                          </Paper>
-                        </Grid>
-                        );
+                            return (
+                                <Grid item key={rl.id}>
+                                    <Paper style={{padding: '10px', background: '#eeeeee'}}>
+                                        <RewardsContainer
+                                            title={rl.title}
+                                            rewards={rl.rewards}
+                                            rewardListId={rl.id}
+                                            key={rl.id}
+                                        />
+                                    </Paper>
+                                </Grid>
+                            );
                         }
                     )}
                 </Grid>

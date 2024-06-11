@@ -54,6 +54,9 @@ const rewardsSlice = createSlice({
     name: "Rewards",
     initialState: initialState,
     reducers: {
+        loadData: (state, action) => {
+
+        },
         addReward: (state, action: PayloadAction<IAddRewardAction>) => {
             const newReward = {
                 id: v1(),

@@ -7,8 +7,9 @@ import {Delete} from '@mui/icons-material';
 import Task from '../../components/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {sortTasks} from "./todoListSlice";
+import {AppRootState} from "../../store";
 
 export type TaskType = {
     id: string;
@@ -31,6 +32,7 @@ type TodoListPropsType = {
 };
 
 export const TodoList = React.memo((props: TodoListPropsType) => {
+    const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
     const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
 
     const onAllClickHandler = useCallback(() => changeFilter('all', props.id), [changeFilter, props.id]);
@@ -64,8 +66,11 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
         },
         [addTask, props.id],
     );
+    const searchedTasks = props.tasks.filter((t) => {
+            return t.title.toLowerCase().includes(searchTerm.toLowerCase())
+        });
 
-    let filteredTasks = props.tasks;
+    let filteredTasks = searchedTasks;
     if (props.filter === 'completed') {
         filteredTasks = filteredTasks.filter((t) => t.isDone);
     }
