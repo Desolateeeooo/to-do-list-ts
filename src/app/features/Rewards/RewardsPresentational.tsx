@@ -27,14 +27,14 @@ export const RewardsPresentational = React.memo((props: RewardsPropsType) => {
                     <h3>
                         <EditableSpan title={props.title} onChange={props.changeRewardsListTitle}></EditableSpan>
                     </h3>
-                    <AddItemForm addItem={props.addReward} label={"Add a Reward"} style={{background: '#D9DDDC'}}></AddItemForm>
+                    <AddItemForm addItem={props.addReward} label={"Add a Reward"} style={{background: '#FFE4E1'}}></AddItemForm>
                 </div>
                 <div>
                     <DndContext onDragEnd={props.onDragEndHandler} sensors={props.sensors}>
                         <SortableContext items={props.rewards} strategy={verticalListSortingStrategy}>
                             {props.rewards && props.rewards.map((r) => {
                                 return (
-                                    <Paper style={{padding: '5px'}}>
+                                    <Paper style={{padding: '5px', margin: '5px'}}>
                                         <Reward
                                             reward={r}
                                             key={r.id}

@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {FilterValuesType} from '../../App';
 import {AddItemForm} from '../../components/AddItemForm';
 import {EditableSpan} from '../../components/EditableSpan';
-import {Button, IconButton} from '@mui/material';
+import {Button, IconButton, Paper} from '@mui/material';
 import {Delete} from '@mui/icons-material';
 import Task from '../../components/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
@@ -104,12 +104,13 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
                     <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addItem={addTaskHandler} label={"Add a To Do"}/>
+            <AddItemForm addItem={addTaskHandler} label={"Add a To Do"} style={{background: '#FFE4E1'}}/>
             <div>
                 <DndContext onDragEnd={onDragEndHandler} sensors={sensors}>
                     <SortableContext items={filteredTasks} strategy={verticalListSortingStrategy}>
                         {filteredTasks.map((task) => {
                             return (
+                                <Paper style={{padding: '5px', margin: '5px'}}>
                                 <Task
                                     changeTaskStatus={props.changeTaskStatus}
                                     changeTaskTitle={props.changeTaskTitle}
@@ -119,6 +120,7 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
                                     key={task.id}
                                     id={task.id}
                                 />
+                                </Paper>
                             );
                         })}
                     </SortableContext>

@@ -104,14 +104,14 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"}/>
-                </Grid>
                 <Grid container spacing={3}>
+                    <Grid container style={{paddingTop: '20px', paddingLeft: '20px'}}>
+                        <AddItemForm addItem={addTodoListHandler} label={"Add a To Do List"} style={{background: '#FFE4E1'}}/>
+                    </Grid>
                     {todoLists && todoLists.map((tl) => {
                         return (
                             <Grid item key={tl.id}>
-                                <Paper style={{padding: '10px'}}>
+                                <Paper style={{padding: '10px', background: '#FFDBE9'}}>
                                     <TodoList
                                         key={tl.id}
                                         id={tl.id}
@@ -133,7 +133,7 @@ function App() {
                     {rewards && rewards.map((rl: RewardListType) => {
                         return (
                           <Grid item key={rl.id}>
-                          <Paper style={{padding: '10px', background: '#eeeeee'}}>
+                          <Paper style={{padding: '10px', background: '#F7D1D8'}}>
                               <RewardsContainer
                                 title={rl.title}
                                 rewards={rl.rewards}
