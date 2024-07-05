@@ -15,6 +15,7 @@ type TaskPropsType = {
     id: string;
 };
 
+
 const Task = (props: TaskPropsType) => {
     const {removeTask, changeTaskTitle, changeTaskStatus, task, todolistId, id} = props;
 
@@ -26,8 +27,11 @@ const Task = (props: TaskPropsType) => {
         ? {
             transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
             transition,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start'
         }
-        : undefined;
+        : {display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'};
 
     const onRemoveHandler = useCallback(
         (event: MouseEvent<HTMLButtonElement>) => {
@@ -62,16 +66,16 @@ const Task = (props: TaskPropsType) => {
             {...attributes}
             {...listeners}
         >
-            <Checkbox onChange={onChangeStatusHandler} checked={task.isDone}/>
-            <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
-            <IconButton onClick={(e) => onRemoveHandler(e)}>
-                <Delete/>
-            </IconButton>
-            <>
-                <div>
-                    <PortalExample/>
-                </div>
-            </>
+            <div>
+                <Checkbox onChange={onChangeStatusHandler} checked={task.isDone}/>
+                <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
+                <IconButton onClick={(e) => onRemoveHandler(e)}>
+                    <Delete/>
+                </IconButton>
+            </div>
+            <div>
+                <PortalExample/>
+            </div>
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import TaskAdvancedSettings from "./TaskAdvancedSettings";
 
 interface IModalContent {
     onClose: () => void;
@@ -12,6 +13,7 @@ interface IModalStyles {
     backgroundColor: string;
     padding: string;
     zIndex: number;
+    borderRadius: string;
 }
 
 interface IOverlayStyles {
@@ -32,6 +34,7 @@ const MODAL_STYLES: IModalStyles = {
     backgroundColor: '#fff',
     padding: '50px',
     zIndex: 1000,
+    borderRadius: '15px 50px 30px',
 }
 
 const OVERLAY_STYLES: IOverlayStyles = {
@@ -49,8 +52,25 @@ export default function ModalContent(props: IModalContent) {
         <>
             <div style={OVERLAY_STYLES}></div>
             <div style={MODAL_STYLES}>
-                <div>I'm a modal dialog</div>
-                <button onClick={props.onClose}>Close</button>
+                <div style={
+                    {display: 'flex', flexDirection: 'column'}
+                }>
+                    <div style={
+                        {
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            gap: '30px',
+                        }
+                    }>
+                        <h4>Edit ToDo</h4>
+                        <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                            <button onClick={props.onClose}>Cancel</button>
+                            <button>Save</button>
+                        </div>
+                    </div>
+                    <TaskAdvancedSettings></TaskAdvancedSettings>
+                </div>
             </div>
         </>
     );
