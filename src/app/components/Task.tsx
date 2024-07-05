@@ -68,8 +68,8 @@ const Task = (props: TaskPropsType) => {
                 <Delete/>
             </IconButton>
             <>
-                <div className="clipping-container">
-                    <PortalExample />
+                <div>
+                    <PortalExample/>
                 </div>
             </>
         </div>
