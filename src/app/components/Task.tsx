@@ -1,9 +1,10 @@
-import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
+import React, {ChangeEvent, memo, MouseEvent, useCallback, useState} from 'react';
 import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
 import {TaskType} from "../features/TodoList/TodoList";
+import PortalExample from "./PortalExample";
 
 type TaskPropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
@@ -66,6 +67,11 @@ const Task = (props: TaskPropsType) => {
             <IconButton onClick={(e) => onRemoveHandler(e)}>
                 <Delete/>
             </IconButton>
+            <>
+                <div className="clipping-container">
+                    <PortalExample />
+                </div>
+            </>
         </div>
     );
 };
