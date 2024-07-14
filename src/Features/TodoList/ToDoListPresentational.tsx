@@ -2,7 +2,7 @@ import {EditableSpan} from "../../Entities/EditableSpan/components/EditableSpan"
 import {Button, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {AddItemForm} from "../../Entities/AddItemForm/components/AddItemForm";
-import {DndContext, DragEndEvent, SensorDescriptor, SensorOptions} from "@dnd-kit/core";
+import {DndContext, DragEndEvent, SensorDescriptor} from "@dnd-kit/core";
 import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import Task from "./components/Task";
 import React, {memo} from "react";
@@ -32,7 +32,7 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} onChange={props.changeTodoListTitleHandler}/>
-                <IconButton onClick={props.removeTodoListHandler}>
+                <IconButton data-testid={"remove-button"} onClick={props.removeTodoListHandler}>
                     <Delete/>
                 </IconButton>
             </h3>
