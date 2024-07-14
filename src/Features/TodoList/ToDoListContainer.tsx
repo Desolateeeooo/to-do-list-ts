@@ -1,17 +1,10 @@
 import React, {useCallback} from 'react';
 import {FilterValuesType} from '../../Application/App';
-import {AddItemForm} from '../../Entities/AddItemForm/components/AddItemForm';
-import {EditableSpan} from '../../Entities/EditableSpan/components/EditableSpan';
-import {Button, IconButton} from '@mui/material';
-import {Delete} from '@mui/icons-material';
-import Task from './components/Task';
-import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
-import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
+import {DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {sortTasks} from "./toDoListSlice";
 import {AppRootState} from "../../Shared/Store/store";
 import {TaskType} from "./ToDoList_types";
-import {addReward} from "../Rewards/rewardsSlice";
 import ToDoListPresentational from "./ToDoListPresentational";
 
 interface ToDoListPropsType {
