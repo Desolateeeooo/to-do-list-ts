@@ -2,13 +2,13 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {IconButton, TextField} from '@mui/material';
 import {ControlPoint} from '@mui/icons-material';
 
-type AddItemFormPropsType = {
-    addItem: (title: string, rewardListId?: string, price?: number) => void;
+interface IAddItemFormProps {
+    addItem: (title: string, rewardListId?: string, price?: number, todolistId?: string) => void;
     label: string;
     style?: React.CSSProperties
 };
 
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo((props: IAddItemFormProps) => {
     const [taskTitle, setTaskTitle] = useState('');
     const [error, setError] = useState<string | null>(null);
 

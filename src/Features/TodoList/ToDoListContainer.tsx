@@ -11,13 +11,15 @@ import {useDispatch, useSelector} from 'react-redux';
 import {sortTasks} from "./toDoListSlice";
 import {AppRootState} from "../../Shared/Store/store";
 import {TaskType} from "./ToDoList_types";
+import {addReward} from "../Rewards/rewardsSlice";
+import ToDoListPresentational from "./ToDoListPresentational";
 
 interface ToDoListPropsType {
     id: string;
     title: string;
     tasks: TaskType[];
     changeFilter: (value: FilterValuesType, todolistId: string) => void;
-    addTask: (title: string, todolistId: string) => void;
+    addTask: (title: string, todolistId?: string) => void;
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void;
     removeTask: (id: string, todolistId: string) => void;
@@ -26,7 +28,7 @@ interface ToDoListPropsType {
     changeTodolistTitle: (id: string, newTitle: string) => void;
 };
 
-export const ToDoList = React.memo((props: ToDoListPropsType) => {
+export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
     const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
     const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
 
@@ -44,11 +46,11 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
 
     const sensors = useSensors(mouseSensor);
 
-    const removeTodolistHandler = useCallback(() => {
+    const removeTodoListHandler = useCallback(() => {
         removeTodolist(props.id);
     }, [removeTodolist, props.id]);
 
-    const changeTodolistTitleHandler = useCallback(
+    const changeTodoListTitleHandler = useCallback(
         (newTitle: string) => {
             changeTodolistTitle(props.id, newTitle);
         },
@@ -62,8 +64,8 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
         [addTask, props.id],
     );
     const searchedTasks = props.tasks.filter((t) => {
-            return t.title.toLowerCase().includes(searchTerm.toLowerCase())
-        });
+        return t.title.toLowerCase().includes(searchTerm.toLowerCase())
+    });
 
     let filteredTasks = searchedTasks;
     if (props.filter === 'completed') {
@@ -97,52 +99,22 @@ export const ToDoList = React.memo((props: ToDoListPropsType) => {
     );
 
     return (
-        <div>
-            <h3>
-                <EditableSpan title={props.title} onChange={changeTodolistTitleHandler}></EditableSpan>
-                <IconButton onClick={removeTodolistHandler}>
-                    <Delete/>
-                </IconButton>
-            </h3>
-            <AddItemForm addItem={addTaskHandler} label={"Add a To Do"}/>
-            <div>
-                <DndContext onDragEnd={onDragEndHandler} sensors={sensors}>
-                    <SortableContext items={filteredTasks} strategy={verticalListSortingStrategy}>
-                        {filteredTasks.map((task) => {
-                            return (
-                                <Task
-                                    changeTaskStatus={props.changeTaskStatus}
-                                    changeTaskTitle={props.changeTaskTitle}
-                                    removeTask={props.removeTask}
-                                    task={task}
-                                    todolistId={props.id}
-                                    key={task.id}
-                                    id={task.id}
-                                />
-                            );
-                        })}
-                    </SortableContext>
-                </DndContext>
-            </div>
-            <div>
-                <Button variant={props.filter === 'all' ? 'contained' : 'text'} onClick={onAllClickHandler}>
-                    All
-                </Button>
-                <Button
-                    color={'primary'}
-                    variant={props.filter === 'active' ? 'contained' : 'text'}
-                    onClick={onActiveClickHandler}
-                >
-                    Active
-                </Button>
-                <Button
-                    color={'secondary'}
-                    variant={props.filter === 'completed' ? 'contained' : 'text'}
-                    onClick={onCompletedClickHandler}
-                >
-                    Completed
-                </Button>
-            </div>
-        </div>
+        <ToDoListPresentational
+            removeTodoListHandler={removeTodoListHandler}
+            changeTodoListTitleHandler={changeTodoListTitleHandler}
+            onAllClickHandler={onAllClickHandler}
+            onCompletedClickHandler={onCompletedClickHandler}
+            onActiveClickHandler={onActiveClickHandler}
+            tasks={filteredTasks}
+            addTaskHandler={addTaskHandler}
+            removeTaskHandler={props.removeTask}
+            changeTaskTitleHandler={props.changeTaskTitle}
+            changeTaskStatusHandler={props.changeTaskStatus}
+            id={props.id}
+            title={props.title}
+            filter={props.filter}
+            sensors={sensors}
+            onDragEndHandler={onDragEndHandler}
+        />
     );
 });

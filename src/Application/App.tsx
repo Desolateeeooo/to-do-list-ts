@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {ToDoList} from '../Features/TodoList/ToDoList';
+import {ToDoListContainer} from '../Features/TodoList/ToDoListContainer';
 import {AddItemForm} from '../Entities/AddItemForm/components/AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from '@mui/icons-material';
@@ -46,7 +46,7 @@ function App() {
     );
 
     const addTaskHandler = useCallback(
-        (title: string, todolistId: string) => {
+        (title: string, todolistId?: string) => {
             dispatch(addTask({title, todolistId}));
         },
         [dispatch],
@@ -118,7 +118,7 @@ function App() {
                         return (
                             <Grid item key={tl.id}>
                                 <Paper style={{padding: '10px'}}>
-                                    <ToDoList
+                                    <ToDoListContainer
                                         key={tl.id}
                                         id={tl.id}
                                         title={tl.title}

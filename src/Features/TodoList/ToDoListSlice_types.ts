@@ -27,7 +27,7 @@ export interface IRemoveTaskAction {
 
 export interface IAddTaskAction {
     title: string;
-    todolistId: string;
+    todolistId?: string;
 }
 
 export interface IChangeTaskStatusAction {
