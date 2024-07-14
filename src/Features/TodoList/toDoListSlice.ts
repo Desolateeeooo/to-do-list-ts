@@ -1,73 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FilterValuesType, TodolistType } from "../../Application/App";
-import { v1 } from "uuid";
-import { UniqueIdentifier } from "@dnd-kit/core";
-import { TaskType } from "./TodoList";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {FilterValuesType, TodolistType} from "../../Application/App";
+import {v1} from "uuid";
+import {UniqueIdentifier} from "@dnd-kit/core";
+import {TaskType} from "./ToDoList_types";
 import {arrayMove} from "@dnd-kit/sortable";
+import {
+    IAddTaskAction,
+    IAddTodoListAction, IChangeTaskStatusAction, IChangeTaskTitleAction,
+    IChangeTodoListFilterAction,
+    IChangeTodoListTitleAction, IRemoveTaskAction,
+    IRemoveTodoListAction, ISortTasksAction
+} from "./ToDoListSlice_types";
 
-interface IRemoveTodoListAction {
-    id: string;
-}
-
-interface IAddTodoListAction {
-    title: string;
-    todolistId: string;
-}
-
-interface IChangeTodoListTitleAction {
-    id: string;
-    title: string;
-}
-
-interface IChangeTodoListFilterAction {
-    id: string;
-    filter: FilterValuesType;
-}
-
-interface IRemoveTaskAction {
-    taskId: string;
-    todolistId: string;
-}
-
-interface IAddTaskAction {
-    title: string;
-    todolistId: string;
-}
-
-interface IChangeTaskStatusAction {
-    taskId: string;
-    todolistId: string;
-    isDone: boolean;
-}
-
-interface IChangeTaskTitleActionType {
-    taskId: string;
-    todolistId: string;
-    title: string;
-}
-
-interface ISortTasksAction {
-    todolistId: string;
-    oldIndex: UniqueIdentifier;
-    newIndex: UniqueIdentifier;
-}
-
-export const todolistId1 = v1();
+export const toDoListId1 = v1();
 const initialState: Array<TodolistType> = [
     {
-        id: todolistId1,
+        id: toDoListId1,
         title: "What to learn",
         filter: "all",
         tasks: [
-            { id: v1(), title: "CSS", isDone: true },
-            { id: v1(), title: "JS", isDone: true },
-            { id: v1(), title: "React", isDone: false },
-            { id: v1(), title: "Redux", isDone: false },
+            {id: v1(), title: "CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "React", isDone: false},
+            {id: v1(), title: "Redux", isDone: false},
         ],
     },
 ];
 
-const todoListSlice = createSlice({
+const toDoListSlice = createSlice({
     name: "todoLists",
     initialState: initialState,
     reducers: {
@@ -75,7 +35,7 @@ const todoListSlice = createSlice({
             return state.filter((tl) => tl.id !== action.payload.id);
         },
         addTodoList: (state, action: PayloadAction<IAddTodoListAction>) => {
-            const { title } = action.payload;
+            const {title} = action.payload;
             const newTodoList: TodolistType = {
                 id: action.payload.todolistId,
                 title,
@@ -90,7 +50,7 @@ const todoListSlice = createSlice({
         ) => {
             return state.map((tl: TodolistType) =>
                 tl.id === action.payload.id
-                    ? { ...tl, title: action.payload.title }
+                    ? {...tl, title: action.payload.title}
                     : tl,
             );
         },
@@ -100,7 +60,7 @@ const todoListSlice = createSlice({
         ) => {
             return state.map((tl: TodolistType) =>
                 tl.id === action.payload.id
-                    ? { ...tl, filter: action.payload.filter }
+                    ? {...tl, filter: action.payload.filter}
                     : tl,
             );
         },
@@ -142,7 +102,7 @@ const todoListSlice = createSlice({
         },
         changeTaskTitle: (
             state,
-            action: PayloadAction<IChangeTaskTitleActionType>,
+            action: PayloadAction<IChangeTaskTitleAction>,
         ) => {
             const todoListIndex = state.findIndex(
                 (tl: TodolistType) => tl.id === action.payload.todolistId,
@@ -196,6 +156,6 @@ export const {
     changeTaskStatus,
     changeTaskTitle,
     sortTasks,
-} = todoListSlice.actions;
+} = toDoListSlice.actions;
 
-export default todoListSlice.reducer;
+export default toDoListSlice.reducer;

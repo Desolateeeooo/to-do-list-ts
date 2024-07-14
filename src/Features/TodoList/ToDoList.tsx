@@ -8,19 +8,14 @@ import Task from './components/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
-import {sortTasks} from "./todoListSlice";
+import {sortTasks} from "./toDoListSlice";
 import {AppRootState} from "../../Shared/Store/store";
+import {TaskType} from "./ToDoList_types";
 
-export type TaskType = {
+interface ToDoListPropsType {
     id: string;
     title: string;
-    isDone: boolean;
-};
-
-type TodoListPropsType = {
-    id: string;
-    title: string;
-    tasks: Array<TaskType>;
+    tasks: TaskType[];
     changeFilter: (value: FilterValuesType, todolistId: string) => void;
     addTask: (title: string, todolistId: string) => void;
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
@@ -31,7 +26,7 @@ type TodoListPropsType = {
     changeTodolistTitle: (id: string, newTitle: string) => void;
 };
 
-export const TodoList = React.memo((props: TodoListPropsType) => {
+export const ToDoList = React.memo((props: ToDoListPropsType) => {
     const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
     const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
 
