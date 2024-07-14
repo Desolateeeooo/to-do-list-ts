@@ -1,4 +1,4 @@
-import React, {ChangeEvent, memo, MouseEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
 import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
 import {Delete} from '@mui/icons-material';
