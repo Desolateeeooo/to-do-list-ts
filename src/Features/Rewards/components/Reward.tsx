@@ -1,8 +1,8 @@
 import React, {memo, MouseEvent, useCallback} from 'react';
 import {IconButton, Paper} from '@mui/material';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from '../../../Entities/EditableSpan/components/EditableSpan';
 import {CurrencyYuan, Delete} from '@mui/icons-material';
-import {RewardType} from "../features/Rewards/RewardsContainer";
+import {RewardType} from "../RewardsContainer";
 import {useSortable} from "@dnd-kit/sortable";
 
 type RewardPropsType = {

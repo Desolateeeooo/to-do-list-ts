@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FilterValuesType, TodolistType } from "../../App";
+import { FilterValuesType, TodolistType } from "../../Application/App";
 import { v1 } from "uuid";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { TaskType } from "./TodoList";

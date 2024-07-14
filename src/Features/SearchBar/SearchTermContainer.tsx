@@ -2,7 +2,7 @@ import React, {ChangeEvent, memo} from "react";
 import SearchTermPresentational from "./SearchTermPresentational";
 import {useDispatch, useSelector} from "react-redux";
 import {clearSearchTerm, setSearchTerm} from "./searchTermSlice";
-import {AppRootState} from "../../store";
+import {AppRootState} from "../../Shared/Store/store";
 
 
 const SearchTermContainer = (props: any) => {

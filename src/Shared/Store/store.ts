@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import todoListSlice from "./features/TodoList/todoListSlice";
-import rewardsSlice from "./features/Rewards/rewardsSlice";
-import searchTermSlice from "./features/SearchBar/searchTermSlice";
+import todoListSlice from "../../Features/TodoList/todoListSlice";
+import rewardsSlice from "../../Features/Rewards/rewardsSlice";
+import searchTermSlice from "../../Features/SearchBar/searchTermSlice";
 
 export type AppRootState = ReturnType<typeof rootReducer>;
 

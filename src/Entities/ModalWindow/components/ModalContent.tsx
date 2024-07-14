@@ -1,5 +1,5 @@
 import React from "react";
-import TaskAdvancedSettings from "./TaskAdvancedSettings";
+import TaskAdvancedSettings from "../../../Features/TodoList/components/TaskAdvancedSettings";
 
 interface IModalContent {
     onClose: () => void;

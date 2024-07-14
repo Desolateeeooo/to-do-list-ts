@@ -1,10 +1,10 @@
 import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
 import {Checkbox, IconButton} from '@mui/material';
-import {EditableSpan} from './EditableSpan';
+import {EditableSpan} from '../../../Entities/EditableSpan/components/EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
-import {TaskType} from "../features/TodoList/TodoList";
-import PortalExample from "./PortalExample";
+import {TaskType} from "../TodoList";
+import PortalExample from "../../../Entities/ModalWindow/components/PortalExample";
 
 type TaskPropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;

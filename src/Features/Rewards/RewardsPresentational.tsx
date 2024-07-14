@@ -1,8 +1,8 @@
 import React from "react";
-import {AddItemForm} from "../../components/AddItemForm";
-import {EditableSpan} from "../../components/EditableSpan";
+import {AddItemForm} from "../../Entities/AddItemForm/components/AddItemForm";
+import {EditableSpan} from "../../Entities/EditableSpan/components/EditableSpan";
 import {RewardType} from "./RewardsContainer";
-import Reward from "../../components/Reward";
+import Reward from "./components/Reward";
 import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import {DndContext, DragEndEvent, SensorDescriptor, SensorOptions} from "@dnd-kit/core";
 import {Paper} from "@mui/material";
