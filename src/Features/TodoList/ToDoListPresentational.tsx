@@ -5,7 +5,7 @@ import {AddItemForm} from "../../Entities/AddItemForm/components/AddItemForm";
 import {DndContext, DragEndEvent, SensorDescriptor, SensorOptions} from "@dnd-kit/core";
 import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import Task from "./components/Task";
-import React from "react";
+import React, {memo} from "react";
 import {TaskType} from "./ToDoList_types";
 import {FilterValuesType} from "../../Application/App";
 
@@ -79,4 +79,4 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
     );
 };
 
-export default ToDoListPresentational;
+export default memo(ToDoListPresentational);
