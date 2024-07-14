@@ -1,9 +1,10 @@
-import React, {ChangeEvent, memo, MouseEvent, useCallback} from 'react';
+import React, {ChangeEvent, memo, MouseEvent, useCallback, useState} from 'react';
 import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from './EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
 import {TaskType} from "../features/TodoList/TodoList";
+import PortalExample from "./PortalExample";
 
 type TaskPropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
@@ -13,6 +14,7 @@ type TaskPropsType = {
     todolistId: string;
     id: string;
 };
+
 
 const Task = (props: TaskPropsType) => {
     const {removeTask, changeTaskTitle, changeTaskStatus, task, todolistId, id} = props;
@@ -25,8 +27,11 @@ const Task = (props: TaskPropsType) => {
         ? {
             transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
             transition,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start'
         }
-        : undefined;
+        : {display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'};
 
     const onRemoveHandler = useCallback(
         (event: MouseEvent<HTMLButtonElement>) => {
@@ -61,11 +66,16 @@ const Task = (props: TaskPropsType) => {
             {...attributes}
             {...listeners}
         >
-            <Checkbox onChange={onChangeStatusHandler} checked={task.isDone}/>
-            <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
-            <IconButton onClick={(e) => onRemoveHandler(e)}>
-                <Delete/>
-            </IconButton>
+            <div>
+                <Checkbox onChange={onChangeStatusHandler} checked={task.isDone}/>
+                <EditableSpan title={task.title} onChange={onChangeTitleHandler}/>
+                <IconButton onClick={(e) => onRemoveHandler(e)}>
+                    <Delete/>
+                </IconButton>
+            </div>
+            <div>
+                <PortalExample/>
+            </div>
         </div>
     );
 };
