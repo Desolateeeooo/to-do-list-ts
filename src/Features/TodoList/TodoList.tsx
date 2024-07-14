@@ -1,15 +1,15 @@
 import React, {useCallback} from 'react';
-import {FilterValuesType} from '../../App';
-import {AddItemForm} from '../../components/AddItemForm';
-import {EditableSpan} from '../../components/EditableSpan';
+import {FilterValuesType} from '../../Application/App';
+import {AddItemForm} from '../../Entities/AddItemForm/components/AddItemForm';
+import {EditableSpan} from '../../Entities/EditableSpan/components/EditableSpan';
 import {Button, IconButton} from '@mui/material';
 import {Delete} from '@mui/icons-material';
-import Task from '../../components/Task';
+import Task from './components/Task';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import {DndContext, DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {sortTasks} from "./todoListSlice";
-import {AppRootState} from "../../store";
+import {AppRootState} from "../../Shared/Store/store";
 
 export type TaskType = {
     id: string;

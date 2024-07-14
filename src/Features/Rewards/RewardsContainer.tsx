@@ -10,7 +10,7 @@ import {
 } from "./rewardsSlice";
 import {RewardsPresentational} from "./RewardsPresentational";
 import {DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from "@dnd-kit/core";
-import {AppRootState} from "../../store";
+import {AppRootState} from "../../Shared/Store/store";
 
 export type RewardType = {
     id: string,

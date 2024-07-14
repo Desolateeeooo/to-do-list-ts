@@ -1,11 +1,11 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, TodoList} from './features/TodoList/TodoList';
-import {AddItemForm} from './components/AddItemForm';
+import {TaskType, TodoList} from '../Features/TodoList/TodoList';
+import {AddItemForm} from '../Entities/AddItemForm/components/AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from '@mui/icons-material';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppRootState} from './store';
+import {AppRootState} from '../Shared/Store/store';
 import {
     addTask,
     addTodoList,
@@ -15,10 +15,10 @@ import {
     changeTodoListTitle,
     removeTask,
     removeTodoList,
-} from "./features/TodoList/todoListSlice";
+} from "../Features/TodoList/todoListSlice";
 import {v1} from "uuid";
-import RewardsContainer, {RewardListType} from "./features/Rewards/RewardsContainer";
-import SearchTermContainer from './features/SearchBar/SearchTermContainer';
+import RewardsContainer, {RewardListType} from "../Features/Rewards/RewardsContainer";
+import SearchTermContainer from '../Features/SearchBar/SearchTermContainer';
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
