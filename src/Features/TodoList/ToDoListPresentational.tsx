@@ -32,7 +32,7 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} onChange={props.changeTodoListTitleHandler}/>
-                <IconButton data-testid={"remove-button"} onClick={props.removeTodoListHandler}>
+                <IconButton onClick={props.removeTodoListHandler}>
                     <Delete/>
                 </IconButton>
             </h3>
@@ -40,7 +40,7 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
             <div>
                 <DndContext onDragEnd={props.onDragEndHandler} sensors={props.sensors}>
                     <SortableContext items={props.tasks} strategy={verticalListSortingStrategy}>
-                        {props.tasks.map((task) => {
+                        {props.tasks && props.tasks.map((task) => {
                             return (
                                 <Task
                                     changeTaskStatus={props.changeTaskStatusHandler}
