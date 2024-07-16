@@ -58,7 +58,7 @@ it('should clear the input field after pressing the button', async () => {
 
     userEvent.click(button);
 
-    // Arrange
+    // Assert
     await waitFor(() => {
         expect(textField).toHaveValue('');
     });

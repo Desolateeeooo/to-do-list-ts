@@ -6,7 +6,7 @@ import {useSortable} from '@dnd-kit/sortable';
 import PortalExample from "../../../Entities/ModalWindow/components/PortalExample";
 import {TaskType} from "../ToDoList_types";
 
-type TaskPropsType = {
+interface ITaskProps  {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
     changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void;
     removeTask: (id: string, todolistId: string) => void;
@@ -16,7 +16,7 @@ type TaskPropsType = {
 };
 
 
-const Task = (props: TaskPropsType) => {
+const Task = (props: ITaskProps) => {
     const {removeTask, changeTaskTitle, changeTaskStatus, task, todolistId, id} = props;
 
     const {attributes, listeners, setNodeRef, transform, transition} = useSortable({
@@ -43,8 +43,8 @@ const Task = (props: TaskPropsType) => {
     );
 
     const onChangeStatusHandler = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            changeTaskStatus(id, e.currentTarget.checked, todolistId);
+        (event: ChangeEvent<HTMLInputElement>) => {
+            changeTaskStatus(id, event.currentTarget.checked, todolistId);
         },
         [id, changeTaskStatus, todolistId],
     );
