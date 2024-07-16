@@ -32,7 +32,7 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} onChange={props.changeTodoListTitleHandler}/>
-                <IconButton onClick={props.removeTodoListHandler}>
+                <IconButton data-testid={"remove-button"} onClick={props.removeTodoListHandler}>
                     <Delete/>
                 </IconButton>
             </h3>

@@ -45,9 +45,10 @@ export const AddItemForm = React.memo((props: IAddItemFormProps) => {
                     error={!!error}
                     variant={'outlined'}
                     helperText={error}
+                    data-testid={"add-item-form"}
                 />
             </div>
-            <IconButton onClick={handleAddTask} color={'primary'}>
+            <IconButton data-testid={"add-item-button"} onClick={handleAddTask} color={'primary'}>
                 <ControlPoint/>
             </IconButton>
         </div>

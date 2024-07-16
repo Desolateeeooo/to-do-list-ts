@@ -108,7 +108,6 @@ export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
             filter={props.filter}
             sensors={sensors}
             onDragEndHandler={onDragEndHandler}
-            data-testid={"ToDoList"}
         />
     );
 });
