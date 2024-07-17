@@ -1,8 +1,6 @@
 import React from "react";
 
-
-
-const TaskAdvancedSettings = (props: any) => {
+const TaskSettingsPresentational = () => {
     return (
         <>
             <div>
@@ -19,4 +17,4 @@ const TaskAdvancedSettings = (props: any) => {
     );
 }
 
-export default TaskAdvancedSettings;
+export default TaskSettingsPresentational;

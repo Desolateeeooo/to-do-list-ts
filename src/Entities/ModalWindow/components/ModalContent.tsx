@@ -1,5 +1,5 @@
 import React from "react";
-import TaskAdvancedSettings from "../../../Features/TodoList/components/TaskAdvancedSettings";
+import TaskSettingsPresentational from "../../../Features/TodoList/components/TaskSettingsPresentational";
 
 interface IModalContent {
     onClose: () => void;
@@ -69,7 +69,7 @@ export default function ModalContent(props: IModalContent) {
                             <button>Save</button>
                         </div>
                     </div>
-                    <TaskAdvancedSettings></TaskAdvancedSettings>
+                    <TaskSettingsPresentational></TaskSettingsPresentational>
                 </div>
             </div>
         </>

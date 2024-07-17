@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, TodoList} from '../Features/TodoList/TodoList';
+import {ToDoListContainer} from '../Features/TodoList/ToDoListContainer';
 import {AddItemForm} from '../Entities/AddItemForm/components/AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
 import {Menu} from '@mui/icons-material';
@@ -15,10 +15,11 @@ import {
     changeTodoListTitle,
     removeTask,
     removeTodoList,
-} from "../Features/TodoList/todoListSlice";
+} from "../Features/TodoList/toDoListSlice";
 import {v1} from "uuid";
 import RewardsContainer, {RewardListType} from "../Features/Rewards/RewardsContainer";
 import SearchTermContainer from '../Features/SearchBar/SearchTermContainer';
+import {TaskType} from "../Features/TodoList/ToDoList_types";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -45,7 +46,7 @@ function App() {
     );
 
     const addTaskHandler = useCallback(
-        (title: string, todolistId: string) => {
+        (title: string, todolistId?: string) => {
             dispatch(addTask({title, todolistId}));
         },
         [dispatch],
@@ -117,7 +118,7 @@ function App() {
                         return (
                             <Grid item key={tl.id}>
                                 <Paper style={{padding: '10px'}}>
-                                    <TodoList
+                                    <ToDoListContainer
                                         key={tl.id}
                                         id={tl.id}
                                         title={tl.title}

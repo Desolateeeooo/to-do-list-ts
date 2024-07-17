@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import todoListSlice from "../../Features/TodoList/todoListSlice";
+import todoListSlice from "../../Features/TodoList/toDoListSlice";
 import rewardsSlice from "../../Features/Rewards/rewardsSlice";
 import searchTermSlice from "../../Features/SearchBar/searchTermSlice";
 

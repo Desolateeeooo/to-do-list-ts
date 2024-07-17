@@ -4,7 +4,7 @@ import {isNumber} from "node:util";
 
 type EditableSpanPropsType = {
     title: string;
-    onChange: (newValue: string, rewardListId?: string) => void;
+    onChange: (newValue: string, rewardListId?: string, todoListId?: string) => void;
     numberSpan?: boolean;
 };
 
