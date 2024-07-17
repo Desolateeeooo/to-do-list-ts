@@ -11,22 +11,11 @@ import {
 import {RewardsPresentational} from "./RewardsPresentational";
 import {DragEndEvent, MouseSensor, UniqueIdentifier, useSensor, useSensors} from "@dnd-kit/core";
 import {AppRootState} from "../../Shared/Store/store";
-
-export type RewardType = {
-    id: string,
-    title: string,
-    price: string,
-}
-
-export type RewardListType = {
-    id: string,
-    title: string,
-    rewards: RewardType[],
-}
+import {IReward} from "./Rewards_types";
 
 type RewardsAContainerPropsType = {
     title: string,
-    rewards: RewardType[],
+    rewards: IReward[],
     rewardListId: string,
 }
 

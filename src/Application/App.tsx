@@ -17,9 +17,10 @@ import {
     removeTodoList,
 } from "../Features/TodoList/toDoListSlice";
 import {v1} from "uuid";
-import RewardsContainer, {RewardListType} from "../Features/Rewards/RewardsContainer";
+import RewardsContainer from "../Features/Rewards/RewardsContainer";
 import SearchTermContainer from '../Features/SearchBar/SearchTermContainer';
 import {TaskType} from "../Features/TodoList/ToDoList_types";
+import {IReward, IRewardList} from "../Features/Rewards/Rewards_types";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodolistType = {
@@ -36,7 +37,7 @@ export type TasksStateType = {
 function App() {
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodolistType>>((state) => state.todoListSlice);
-    const rewards = useSelector<AppRootState, Array<RewardListType>>((state) => state.rewardsSLice);
+    const rewards = useSelector<AppRootState, Array<IRewardList>>((state) => state.rewardsSLice);
 
     const removeTaskHandler = useCallback(
         (id: string, todolistId: string) => {
@@ -136,7 +137,7 @@ function App() {
                             </Grid>
                         );
                     })}
-                    {rewards && rewards.map((rl: RewardListType) => {
+                    {rewards && rewards.map((rl: IRewardList) => {
                             return (
                                 <Grid item key={rl.id}>
                                     <Paper style={{padding: '10px', background: '#eeeeee'}}>

@@ -10,7 +10,7 @@ import {
     IChangeTodoListFilterAction,
     IChangeTodoListTitleAction, IRemoveTaskAction,
     IRemoveTodoListAction, ISortTasksAction
-} from "./ToDoListSlice_types";
+} from "./toDoListSlice_types";
 
 export const toDoListId1 = v1();
 const initialState: Array<TodolistType> = [
