@@ -1,46 +1,17 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {v1} from "uuid";
-import {RewardListType, RewardType} from "./RewardsContainer";
 import {arrayMove} from "@dnd-kit/sortable";
-import {UniqueIdentifier} from "@dnd-kit/core";
-
-interface IAddRewardAction {
-    title: string;
-    // price: number | undefined;
-    rewardListId: string | undefined;
-}
-
-interface IRemoveRewardAction {
-    id: string,
-    rewardListId: string,
-}
-
-interface IChangeRewardsListTitleAction {
-    title: string;
-    rewardListId: string | undefined;
-}
-
-interface IChangeRewardTitleAction {
-    title: string;
-    id: string;
-    rewardListId: string;
-}
-
-interface ISortRewardsAction {
-    rewardListId: string;
-    oldIndex: UniqueIdentifier;
-    newIndex: UniqueIdentifier;
-}
-
-interface IChangeRewardPriceAction {
-    rewardListId: string;
-    id: string;
-    newPrice: string;
-}
+import {IReward, IRewardList} from "./Rewards_types";
+import {
+    IAddRewardAction, IChangeRewardPriceAction,
+    IChangeRewardsListTitleAction,
+    IChangeRewardTitleAction,
+    IRemoveRewardAction, ISortRewardsAction
+} from "./rewardsSlice_types";
 
 const initialRewardListId = v1();
 
-const initialState: RewardListType[] = [
+const initialState: IRewardList[] = [
     {
         id: initialRewardListId,
         title: "Rewards",
@@ -54,9 +25,6 @@ const rewardsSlice = createSlice({
     name: "Rewards",
     initialState: initialState,
     reducers: {
-        loadData: (state, action) => {
-
-        },
         addReward: (state, action: PayloadAction<IAddRewardAction>) => {
             const newReward = {
                 id: v1(),
@@ -64,12 +32,12 @@ const rewardsSlice = createSlice({
                 price: `${0}`,
             };
             const rewardListIndex = state.findIndex(
-                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+                (rl: IRewardList) => rl.id === action.payload.rewardListId,
             );
             state[rewardListIndex].rewards.unshift(newReward);
         },
         changeRewardsListTitle: (state, action: PayloadAction<IChangeRewardsListTitleAction>) => {
-            return state.map((rl: RewardListType) =>
+            return state.map((rl: IRewardList) =>
                 rl.id === action.payload.rewardListId
                     ? {...rl, title: action.payload.title}
                     : rl,
@@ -77,10 +45,10 @@ const rewardsSlice = createSlice({
         },
         changeRewardTitle: (state, action: PayloadAction<IChangeRewardTitleAction>) => {
             const rewardListIndex = state.findIndex(
-                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+                (rl: IRewardList) => rl.id === action.payload.rewardListId,
             );
             state[rewardListIndex].rewards = state[rewardListIndex].rewards.map(
-                (r: RewardType) =>
+                (r: IReward) =>
                     r.id === action.payload.id
                         ? {
                             ...r,
@@ -91,15 +59,15 @@ const rewardsSlice = createSlice({
         },
         removeReward: (state, action: PayloadAction<IRemoveRewardAction>) => {
             const rewardListIndex = state.findIndex(
-                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+                (rl: IRewardList) => rl.id === action.payload.rewardListId,
             );
             state[rewardListIndex].rewards = state[rewardListIndex].rewards.filter(
-                (r: RewardType) => r.id !== action.payload.id,
+                (r: IReward) => r.id !== action.payload.id,
             );
         },
         sortRewards: (state, action: PayloadAction<ISortRewardsAction>) => {
             const rewardsListIndex = state.findIndex(
-                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+                (rl: IRewardList) => rl.id === action.payload.rewardListId,
             );
             const oldIndex = action.payload.oldIndex;
             const newIndex = action.payload.newIndex;
@@ -125,10 +93,10 @@ const rewardsSlice = createSlice({
         },
         changeRewardPrice: (state, action: PayloadAction<IChangeRewardPriceAction>) => {
             const rewardListIndex = state.findIndex(
-                (rl: RewardListType) => rl.id === action.payload.rewardListId,
+                (rl: IRewardList) => rl.id === action.payload.rewardListId,
             );
             state[rewardListIndex].rewards = state[rewardListIndex].rewards.map(
-                (r: RewardType) =>
+                (r: IReward) =>
                     r.id === action.payload.id
                         ? {
                             ...r,

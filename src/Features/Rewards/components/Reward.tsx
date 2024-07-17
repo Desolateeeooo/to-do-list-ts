@@ -2,11 +2,11 @@ import React, {memo, MouseEvent, useCallback} from 'react';
 import {IconButton, Paper} from '@mui/material';
 import {EditableSpan} from '../../../Entities/EditableSpan/components/EditableSpan';
 import {CurrencyYuan, Delete} from '@mui/icons-material';
-import {RewardType} from "../RewardsContainer";
 import {useSortable} from "@dnd-kit/sortable";
+import {IReward} from "../Rewards_types";
 
-type RewardPropsType = {
-    reward: RewardType;
+interface IRewardProps  {
+    reward: IReward;
     id: string;
     changeRewardTitle: (id: string, title: string, rewardListId: string) => void;
     rewardListId: string,
@@ -15,7 +15,7 @@ type RewardPropsType = {
     changeRewardPrice: (id: string, newPrice: string, rewardListId: string) => void;
 }
 
-const Reward = (props: RewardPropsType) => {
+const Reward = (props: IRewardProps) => {
     const {removeReward, changeRewardTitle, changeRewardPrice, rewardListId, id} = props;
 
     const {attributes, listeners, setNodeRef, transform, transition} = useSortable({

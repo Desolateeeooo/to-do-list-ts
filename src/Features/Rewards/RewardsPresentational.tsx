@@ -1,18 +1,18 @@
 import React from "react";
 import {AddItemForm} from "../../Entities/AddItemForm/components/AddItemForm";
 import {EditableSpan} from "../../Entities/EditableSpan/components/EditableSpan";
-import {RewardType} from "./RewardsContainer";
 import Reward from "./components/Reward";
 import {SortableContext, verticalListSortingStrategy} from "@dnd-kit/sortable";
 import {DndContext, DragEndEvent, SensorDescriptor, SensorOptions} from "@dnd-kit/core";
 import {Paper} from "@mui/material";
+import {IReward} from "./Rewards_types";
 
 type RewardsPropsType = {
     addReward: (title: string, rewardListId?: string, price?: number) => void;
     removeReward: (id: string, rewardListId: string) => void;
     title: string;
     changeRewardsListTitle: (title: string, rewardListId: string | undefined) => void;
-    rewards: RewardType[];
+    rewards: IReward[];
     changeRewardTitle: (id: string, title: string, rewardListId: string) => void;
     rewardListId: string;
     sensors: SensorDescriptor<SensorOptions>[];
