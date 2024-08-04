@@ -1,5 +1,5 @@
 import React from "react";
-import TaskSettingsPresentational from "../../../Features/TodoList/components/TaskSettingsPresentational";
+import TaskSettingsPresentational from "../TaskSettingsPresentational";
 
 interface IModalContent {
     onClose: () => void;

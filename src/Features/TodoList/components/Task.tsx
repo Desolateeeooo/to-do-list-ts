@@ -3,7 +3,7 @@ import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from '../../../Entities/EditableSpan/components/EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
-import PortalExample from "../../../Entities/ModalWindow/components/PortalExample";
+import PortalExample from "./ModalWindow/PortalExample";
 import {TaskType} from "../ToDoList_types";
 
 interface ITaskProps {
