@@ -23,7 +23,7 @@ import {TaskType} from "../Features/TodoList/ToDoList_types";
 import {IReward, IRewardList} from "../Features/Rewards/Rewards_types";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
-export type TodolistType = {
+export type TodoListType = {
     id: string;
     title: string;
     filter: FilterValuesType;
@@ -36,33 +36,33 @@ export type TasksStateType = {
 
 function App() {
     const dispatch = useDispatch();
-    const todoLists = useSelector<AppRootState, Array<TodolistType>>((state) => state.todoListSlice);
+    const todoLists = useSelector<AppRootState, Array<TodoListType>>((state) => state.todoListSlice);
     const rewards = useSelector<AppRootState, Array<IRewardList>>((state) => state.rewardsSLice);
 
     const removeTaskHandler = useCallback(
-        (id: string, todolistId: string) => {
-            dispatch(removeTask({taskId: id, todolistId}));
+        (id: string, todoListId: string) => {
+            dispatch(removeTask({taskId: id, todoListId}));
         },
         [dispatch],
     );
 
     const addTaskHandler = useCallback(
-        (title: string, todolistId?: string) => {
-            dispatch(addTask({title, todolistId}));
+        (title: string, todoListId?: string) => {
+            dispatch(addTask({title, todoListId}));
         },
         [dispatch],
     );
 
     const changeTaskStatusHandler = useCallback(
-        (id: string, isDone: boolean, todolistId: string) => {
-            dispatch(changeTaskStatus({taskId: id, isDone, todolistId}));
+        (id: string, isDone: boolean, todoListId: string) => {
+            dispatch(changeTaskStatus({taskId: id, isDone, todoListId}));
         },
         [dispatch],
     );
 
     const changeTaskTitleHandler = useCallback(
-        (id: string, newTitle: string, todolistId: string) => {
-            dispatch(changeTaskTitle({taskId: id, title: newTitle, todolistId}));
+        (id: string, newTitle: string, todoListId: string) => {
+            dispatch(changeTaskTitle({taskId: id, title: newTitle, todoListId}));
         },
         [dispatch],
     );
@@ -74,14 +74,14 @@ function App() {
         [dispatch],
     );
 
-    const removeTodoListHandler = useCallback(
+    const removeToDoListHandler = useCallback(
         (id: string) => {
             dispatch(removeTodoList({id}));
         },
         [dispatch],
     );
 
-    const changeTodoListTitleHandler = useCallback(
+    const changeToDoListTitleHandler = useCallback(
         (id: string, title: string) => {
             dispatch(changeTodoListTitle({id, title}));
         },
@@ -90,7 +90,7 @@ function App() {
 
     const addTodoListHandler = useCallback(
         (title: string) => {
-            dispatch(addTodoList({todolistId: v1(), title}));
+            dispatch(addTodoList({todoListId: v1(), title}));
         },
         [dispatch],
     );
@@ -130,8 +130,8 @@ function App() {
                                         changeTaskStatus={changeTaskStatusHandler}
                                         changeTaskTitle={changeTaskTitleHandler}
                                         filter={tl.filter}
-                                        removeTodolist={removeTodoListHandler}
-                                        changeTodolistTitle={changeTodoListTitleHandler}
+                                        removeTodoList={removeToDoListHandler}
+                                        changeTodoListTitle={changeToDoListTitleHandler}
                                     />
                                 </Paper>
                             </Grid>

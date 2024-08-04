@@ -7,7 +7,7 @@ export interface IRemoveTodoListAction {
 
 export interface IAddTodoListAction {
     title: string;
-    todolistId: string;
+    todoListId: string;
 }
 
 export interface IChangeTodoListTitleAction {
@@ -22,28 +22,28 @@ export interface IChangeTodoListFilterAction {
 
 export interface IRemoveTaskAction {
     taskId: string;
-    todolistId: string;
+    todoListId: string;
 }
 
 export interface IAddTaskAction {
     title: string;
-    todolistId?: string;
+    todoListId?: string;
 }
 
 export interface IChangeTaskStatusAction {
     taskId: string;
-    todolistId: string;
+    todoListId: string;
     isDone: boolean;
 }
 
 export interface IChangeTaskTitleAction {
     taskId: string;
-    todolistId: string;
+    todoListId: string;
     title: string;
 }
 
 export interface ISortTasksAction {
-    todolistId: string;
+    todoListId: string;
     oldIndex: UniqueIdentifier;
     newIndex: UniqueIdentifier;
 }

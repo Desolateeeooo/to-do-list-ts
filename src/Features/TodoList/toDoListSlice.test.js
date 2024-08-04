@@ -51,7 +51,7 @@ describe('toDoListSlice', () => {
 
         // Act
         const action = addTodoList({
-            todolistId: "2",
+            todoListId: "2",
             title: "What to read"
         });
         const updatedState = toDoListReducer(initialState, action);
@@ -137,7 +137,7 @@ describe('toDoListSlice', () => {
         ];
 
         // Act
-        const action = removeTask({taskId: "2", todolistId: "2"});
+        const action = removeTask({taskId: "2", todoListId: "2"});
         const updatedState = toDoListReducer(initialState, action);
 
         // Assert
@@ -170,7 +170,7 @@ describe('toDoListSlice', () => {
         ];
 
         // Act
-        const action = addTask({title: "Water", todolistId: "2"});
+        const action = addTask({title: "Water", todoListId: "2"});
         const updatedState = toDoListReducer(initialState, action);
 
         // Assert
@@ -203,7 +203,7 @@ describe('toDoListSlice', () => {
         ];
 
         // Act
-        const action = changeTaskStatus({taskId: "2", todolistId: "2", isDone: true});
+        const action = changeTaskStatus({taskId: "2", todoListId: "2", isDone: true});
         const updatedState = toDoListReducer(initialState, action);
 
         // Arrange
@@ -237,7 +237,7 @@ describe('toDoListSlice', () => {
         ];
 
         // Act
-        const action = changeTaskTitle({taskId: "2", todolistId: "2", title: "Pork Meat"});
+        const action = changeTaskTitle({taskId: "2", todoListId: "2", title: "Pork Meat"});
         const updatedState = toDoListReducer(initialState, action);
 
         // Assert
@@ -265,7 +265,7 @@ describe('toDoListSlice', () => {
         ];
 
         // Act
-        const action = sortTasks({todolistId: "1", oldIndex: taskId1, newIndex: taskId2});
+        const action = sortTasks({todoListId: "1", oldIndex: taskId1, newIndex: taskId2});
         const updatedState = toDoListReducer(initialState, action);
 
         // Assert

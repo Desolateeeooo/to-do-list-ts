@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {FilterValuesType, TodolistType} from "../../Application/App";
+import {FilterValuesType, TodoListType} from "../../Application/App";
 import {v1} from "uuid";
 import {UniqueIdentifier} from "@dnd-kit/core";
 import {TaskType} from "./ToDoList_types";
@@ -13,7 +13,7 @@ import {
 } from "./toDoListSlice_types";
 
 export const toDoListId1 = v1();
-const initialState: Array<TodolistType> = [
+const initialState: Array<TodoListType> = [
     {
         id: toDoListId1,
         title: "What to learn",
@@ -36,8 +36,8 @@ const toDoListSlice = createSlice({
         },
         addTodoList: (state, action: PayloadAction<IAddTodoListAction>) => {
             const {title} = action.payload;
-            const newTodoList: TodolistType = {
-                id: action.payload.todolistId,
+            const newTodoList: TodoListType = {
+                id: action.payload.todoListId,
                 title,
                 filter: "all",
                 tasks: [],
@@ -48,7 +48,7 @@ const toDoListSlice = createSlice({
             state,
             action: PayloadAction<IChangeTodoListTitleAction>,
         ) => {
-            return state.map((tl: TodolistType) =>
+            return state.map((tl: TodoListType) =>
                 tl.id === action.payload.id
                     ? {...tl, title: action.payload.title}
                     : tl,
@@ -58,7 +58,7 @@ const toDoListSlice = createSlice({
             state,
             action: PayloadAction<IChangeTodoListFilterAction>,
         ) => {
-            return state.map((tl: TodolistType) =>
+            return state.map((tl: TodoListType) =>
                 tl.id === action.payload.id
                     ? {...tl, filter: action.payload.filter}
                     : tl,
@@ -66,7 +66,7 @@ const toDoListSlice = createSlice({
         },
         removeTask: (state, action: PayloadAction<IRemoveTaskAction>) => {
             const todoListIndex = state.findIndex(
-                (tl: TodolistType) => tl.id === action.payload.todolistId,
+                (tl: TodoListType) => tl.id === action.payload.todoListId,
             );
             state[todoListIndex].tasks = state[todoListIndex].tasks.filter(
                 (t: TaskType) => t.id !== action.payload.taskId,
@@ -79,7 +79,7 @@ const toDoListSlice = createSlice({
                 isDone: false,
             };
             const todoListIndex = state.findIndex(
-                (tl: TodolistType) => tl.id === action.payload.todolistId,
+                (tl: TodoListType) => tl.id === action.payload.todoListId,
             );
             state[todoListIndex].tasks.unshift(newTask);
         },
@@ -88,7 +88,7 @@ const toDoListSlice = createSlice({
             action: PayloadAction<IChangeTaskStatusAction>,
         ) => {
             const todoListIndex = state.findIndex(
-                (tl: TodolistType) => tl.id === action.payload.todolistId,
+                (tl: TodoListType) => tl.id === action.payload.todoListId,
             );
             state[todoListIndex].tasks = state[todoListIndex].tasks.map(
                 (t: TaskType) =>
@@ -105,7 +105,7 @@ const toDoListSlice = createSlice({
             action: PayloadAction<IChangeTaskTitleAction>,
         ) => {
             const todoListIndex = state.findIndex(
-                (tl: TodolistType) => tl.id === action.payload.todolistId,
+                (tl: TodoListType) => tl.id === action.payload.todoListId,
             );
             state[todoListIndex].tasks = state[todoListIndex].tasks.map(
                 (t: TaskType) =>
@@ -119,7 +119,7 @@ const toDoListSlice = createSlice({
         },
         sortTasks: (state, action: PayloadAction<ISortTasksAction>) => {
             const todoListIndex = state.findIndex(
-                (tl: TodolistType) => tl.id === action.payload.todolistId,
+                (tl: TodoListType) => tl.id === action.payload.todoListId,
             );
             const oldIndex = action.payload.oldIndex;
             const newIndex = action.payload.newIndex;

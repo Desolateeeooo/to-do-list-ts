@@ -17,10 +17,10 @@ interface ITodoListPresentationalProps {
     onAllClickHandler: () => void;
     onActiveClickHandler: () => void;
     onCompletedClickHandler: () => void;
-    addTaskHandler: (title: string, todolistId?: string) => void;
-    changeTaskStatusHandler: (taskId: string, isDone: boolean, todolistId: string) => void;
-    changeTaskTitleHandler: (id: string, newTitle: string, todolistId: string) => void;
-    removeTaskHandler: (id: string, todolistId: string) => void;
+    addTaskHandler: (title: string, todoListId?: string) => void;
+    changeTaskStatusHandler: (taskId: string, isDone: boolean, todoListId: string) => void;
+    changeTaskTitleHandler: (id: string, newTitle: string, todoListId: string) => void;
+    removeTaskHandler: (id: string, todoListId: string) => void;
     removeTodoListHandler: () => void;
     changeTodoListTitleHandler: (newTitle: string) => void;
     sensors: SensorDescriptor<any>[]
@@ -47,7 +47,7 @@ const ToDoListPresentational = (props: ITodoListPresentationalProps) => {
                                     changeTaskTitle={props.changeTaskTitleHandler}
                                     removeTask={props.removeTaskHandler}
                                     task={task}
-                                    todolistId={props.id}
+                                    todoListId={props.id}
                                     key={task.id}
                                     id={task.id}
                                 />

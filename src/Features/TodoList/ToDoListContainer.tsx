@@ -11,19 +11,19 @@ interface ToDoListPropsType {
     id: string;
     title: string;
     tasks: TaskType[];
-    changeFilter: (value: FilterValuesType, todolistId: string) => void;
-    addTask: (title: string, todolistId?: string) => void;
-    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
-    changeTaskTitle: (id: string, newTitle: string, todolistId: string) => void;
-    removeTask: (id: string, todolistId: string) => void;
+    changeFilter: (value: FilterValuesType, todoListId: string) => void;
+    addTask: (title: string, todoListId?: string) => void;
+    changeTaskStatus: (taskId: string, isDone: boolean, todoListId: string) => void;
+    changeTaskTitle: (id: string, newTitle: string, todoListId: string) => void;
+    removeTask: (id: string, todoListId: string) => void;
     filter: FilterValuesType;
-    removeTodolist: (todolistId: string) => void;
-    changeTodolistTitle: (id: string, newTitle: string) => void;
+    removeTodoList: (todoListId: string) => void;
+    changeTodoListTitle: (id: string, newTitle: string) => void;
 };
 
 export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
     const searchTerm = useSelector<AppRootState, string>((state) => state.searchTermSlice);
-    const {changeFilter, removeTodolist, changeTodolistTitle, addTask} = props;
+    const {changeFilter, removeTodoList, changeTodoListTitle, addTask} = props;
 
     const onAllClickHandler = useCallback(() => changeFilter('all', props.id), [changeFilter, props.id]);
     const onActiveClickHandler = useCallback(() => changeFilter('active', props.id), [changeFilter, props.id]);
@@ -39,15 +39,15 @@ export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
 
     const sensors = useSensors(mouseSensor);
 
-    const removeTodoListHandler = useCallback(() => {
-        removeTodolist(props.id);
-    }, [removeTodolist, props.id]);
+    const removeToDoListHandler = useCallback(() => {
+        removeTodoList(props.id);
+    }, [removeTodoList, props.id]);
 
-    const changeTodoListTitleHandler = useCallback(
+    const changeToDoListTitleHandler = useCallback(
         (newTitle: string) => {
-            changeTodolistTitle(props.id, newTitle);
+            changeTodoListTitle(props.id, newTitle);
         },
-        [props.id, changeTodolistTitle],
+        [props.id, changeTodoListTitle],
     );
 
     const addTaskHandler = useCallback(
@@ -71,8 +71,8 @@ export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
     const dispatch = useDispatch();
 
     const sortTasksHandler = useCallback(
-        (todolistId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier) => {
-            dispatch(sortTasks({todolistId, oldIndex, newIndex}));
+        (todoListId: string, oldIndex: UniqueIdentifier, newIndex: UniqueIdentifier) => {
+            dispatch(sortTasks({todoListId, oldIndex, newIndex}));
         },
         [dispatch],
     );
@@ -93,8 +93,8 @@ export const ToDoListContainer = React.memo((props: ToDoListPropsType) => {
 
     return (
         <ToDoListPresentational
-            removeTodoListHandler={removeTodoListHandler}
-            changeTodoListTitleHandler={changeTodoListTitleHandler}
+            removeTodoListHandler={removeToDoListHandler}
+            changeTodoListTitleHandler={changeToDoListTitleHandler}
             onAllClickHandler={onAllClickHandler}
             onCompletedClickHandler={onCompletedClickHandler}
             onActiveClickHandler={onActiveClickHandler}
