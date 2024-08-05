@@ -1,0 +1,40 @@
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 16px;
+	align-items: 'center';
+	gap: 10px;
+}
+
+.button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cancel-button {
+  background-color: #e74c3c; /* red */
+  color: white;
+  border-color: #e74c3c;
+}
+
+.cancel-button:hover {
+  background-color: #c0392b; /* darker red */
+  border-color: #c0392b;
+}
+
+.save-button {
+  background-color: #2ecc71; /* green */
+  color: white;
+  border-color: #2ecc71;
+}
+
+.save-button:hover {
+  background-color: #27ae60; /* darker green */
+  border-color: #27ae60;
+}

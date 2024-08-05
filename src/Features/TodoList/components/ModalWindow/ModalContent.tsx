@@ -1,5 +1,6 @@
 import React from "react";
 import TaskSettingsPresentational from "../TaskSettings/TaskSettingsPresentational";
+import "./ModalContent.css";
 
 interface IModalContent {
     onClose: () => void;
@@ -65,8 +66,8 @@ export default function ModalContent(props: IModalContent) {
                     }>
                         <h4>Edit ToDo</h4>
                         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                            <button onClick={props.onClose}>Cancel</button>
-                            <button>Save</button>
+                            <button onClick={props.onClose} className="cancel-button">Cancel</button>
+                            <button className="save-button">Save</button>
                         </div>
                     </div>
                     <TaskSettingsPresentational></TaskSettingsPresentational>
@@ -75,3 +76,5 @@ export default function ModalContent(props: IModalContent) {
         </>
     );
 }
+
+// 

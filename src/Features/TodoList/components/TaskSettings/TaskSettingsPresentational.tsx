@@ -1,58 +1,54 @@
-import React, {memo}  from "react";
-
-
-interface ITaskSettingsPresentational {
-
-}
+import React from "react";
+import "./TaskSettingsPresentational.css"; // Import the CSS file
+import RepeatOn from "./components/RepeatOn";
 
 const TaskSettingsPresentational = () => {
   return (
-    <>
-      <div>
-        <div id="change-title">
-          <form>
-            <label htmlFor="title">Title:</label>
-            <br />
-            <input type="text" name="title" id="title" data-testid="title"/>
-          </form>
-        </div>
-        <div id="change-notes">
-          <form>
-            <label htmlFor="notes">Notes:</label>
-            <br />
-            <textarea id="notes" name="notes" rows={3} cols={30} />
-          </form>
-        </div>
-        <form id="repeats">
-          <label htmlFor="repeats">Repeats</label>
-          <select id="repeats" name="repeats">
+    <div className="task-settings">
+      <div className="form-group">
+        <form>
+          <label htmlFor="title" className="form-label">
+            Title:
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            data-testid="title"
+            className="form-input"
+          />
+        </form>
+      </div>
+      <div className="form-group">
+        <form>
+          <label htmlFor="notes" className="form-label">
+            Notes:
+          </label>
+          <textarea
+            id="notes"
+            name="notes"
+            data-testid="notes"
+            rows={3}
+            className="form-textarea"
+          />
+        </form>
+      </div>
+      <div className="form-group">
+        <form>
+          <label htmlFor="repeats" className="form-label">
+            Repeats:
+          </label>
+          <select id="repeats" name="repeats" className="form-select">
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>
         </form>
-        <form id="repeatOn">
-          <label htmlFor="repeatOn">Repeat On</label>
-					<br />
-          <input type="button" id="sunday" name="day" value="Sunday" />
-          <br />
-          <input type="button" id="monday" name="day" value="Monday" />
-					<br />
-          <input type="button" id="tuesday" name="day" value="Tuesday" />
-          <br />
-          <input type="button" id="wednesday" name="day" value="Wednesday" />
-					<br />
-          <input type="button" id="thursday" name="day" value="Thursday" />
-          <br />
-          <input type="button" id="friday" name="day" value="Friday" />
-					<br />
-          <input type="button" id="saturday" name="day" value="Saturday" />
-        </form>
       </div>
-    </>
+      <RepeatOn></RepeatOn>
+    </div>
   );
 };
 
-export default memo(TaskSettingsPresentational);
-
+export default TaskSettingsPresentational;

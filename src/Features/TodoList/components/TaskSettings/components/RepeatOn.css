@@ -1,0 +1,38 @@
+/* Container to align buttons in two rows */
+#repeatOn {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to form two rows */
+  justify-content: flex-start; /* Center buttons in each row */
+  align-items: center;
+  max-width: 400px; /* Set maximum width for the container */
+  margin: 0 auto; /* Center the form horizontally */
+}
+
+/* Basic button styles */
+#repeatOn input[type="button"] {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 10px 10px;
+  margin: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  flex: 1 1 22%; /* Flex basis to control width per item, allowing two rows */
+  max-width: 120px; /* Set max width for buttons */
+}
+
+/* Active button styles */
+#repeatOn input[type="button"].active {
+  background-color: #4CAF50; /* Change to any color you prefer for active */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effect */
+#repeatOn input[type="button"]:hover {
+  background-color: #ddd;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
