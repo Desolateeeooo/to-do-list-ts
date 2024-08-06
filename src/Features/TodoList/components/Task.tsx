@@ -3,8 +3,8 @@ import {Checkbox, IconButton} from '@mui/material';
 import {EditableSpan} from '../../../Entities/EditableSpan/components/EditableSpan';
 import {Delete} from '@mui/icons-material';
 import {useSortable} from '@dnd-kit/sortable';
-import PortalExample from "./ModalWindow/PortalExample";
 import {TaskType} from "../ToDoList_types";
+import PortalTaskSettings from './ModalWindow/PortalTaskSettings';
 
 interface ITaskProps {
     changeTaskStatus: (taskId: string, isDone: boolean, todoListId: string) => void;
@@ -74,7 +74,11 @@ const Task = (props: ITaskProps) => {
                 </IconButton>
             </div>
             <div>
-                <PortalExample/>
+                <PortalTaskSettings
+									changeTaskTitle={changeTaskTitle}
+									todoListId={todoListId}
+									id={id}
+								/>
             </div>
         </div>
     );

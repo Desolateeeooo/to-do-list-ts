@@ -1,9 +1,12 @@
 import React from "react";
-import TaskSettingsPresentational from "../TaskSettings/TaskSettingsPresentational";
+import TaskSettingsContainer from "../TaskSettings/TaskSettingsContainer"
 import "./ModalContent.css";
 
 interface IModalContent {
     onClose: () => void;
+		changeTaskTitle: (id: string, newTitle: string, todoListId: string) => void;
+		todoListId: string;
+		id: string;
 }
 
 interface IModalStyles {
@@ -70,11 +73,15 @@ export default function ModalContent(props: IModalContent) {
                             <button className="save-button">Save</button>
                         </div>
                     </div>
-                    <TaskSettingsPresentational></TaskSettingsPresentational>
+                    <TaskSettingsContainer 
+											changeTaskTitle={props.changeTaskTitle}
+											todoListId={props.todoListId}
+											id={props.id}
+										/>
                 </div>
             </div>
         </>
     );
 }
 
-// 
+// TODO delete this component and remove everything to the TaskSettingsPresentational

@@ -20,7 +20,7 @@ import {v1} from "uuid";
 import RewardsContainer from "../Features/Rewards/RewardsContainer";
 import SearchTermContainer from '../Features/SearchBar/SearchTermContainer';
 import {TaskType} from "../Features/TodoList/ToDoList_types";
-import {IReward, IRewardList} from "../Features/Rewards/Rewards_types";
+import {IRewardList} from "../Features/Rewards/Rewards_types";
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
 export type TodoListType = {

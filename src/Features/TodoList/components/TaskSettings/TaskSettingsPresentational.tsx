@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./TaskSettingsPresentational.css"; // Import the CSS file
 import RepeatOn from "./components/RepeatOn";
+import RewardAmount from "./components/RewardAmount";
 
-const TaskSettingsPresentational = () => {
+interface ITaskSettingsPresentational {
+	handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void; 
+	title: string;
+}
+
+const TaskSettingsPresentational = (props: ITaskSettingsPresentational) => {
   return (
     <div className="task-settings">
       <div className="form-group">
@@ -16,6 +22,8 @@ const TaskSettingsPresentational = () => {
             id="title"
             data-testid="title"
             className="form-input"
+						value={props.title}
+						onChange={props.handleInputChange}
           />
         </form>
       </div>
@@ -46,7 +54,8 @@ const TaskSettingsPresentational = () => {
           </select>
         </form>
       </div>
-      <RepeatOn></RepeatOn>
+      <RepeatOn />
+      <RewardAmount />
     </div>
   );
 };

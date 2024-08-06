@@ -1,0 +1,48 @@
+.form-range {
+  width: 100%;
+  margin: 8px 0;
+  appearance: none;
+  height: 6px;
+  border-radius: 5px;
+  background: #ddd;
+  outline: none;
+  transition: background 0.3s ease;
+}
+
+.form-range:hover {
+  background: #ccc;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  background: #388e3c;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4caf50;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-range::-moz-range-thumb:hover {
+  background: #388e3c;
+}
+
+#rewardValue {
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  text-align: center;
+}
